@@ -1,13 +1,14 @@
 // Initializing Global Variables
-let equipmentArray = [
+let itemsArray = [
     new Equipment('None', 0, 0),
     new Equipment('Torn Leather Boots', 3, 2),
-    new Equipment('Cloth Robe', 2, 2)
-]; //array of all equipment
-let inventoryArray = [
+    new Equipment('Cloth Robe', 2, 2),
     new Item('Torch', 0, 0),
     new Item('Copper Shortsword', 1, 2)
-]; //array of all items 
+]; //array of all items
+let inventoryArray = [
+    itemsArray[3]
+]; //array of current items in inventory
 let enemiesArray = [
     new Enemy('Unknown Body', 0, 0, 0)
 ]; //array of all enemies in game
@@ -18,12 +19,12 @@ start();
 // Character constructor
 function Character(health) {
     this.health = health
-    this.inventory = [inventoryArray[0]];
+    this.inventory = inventoryArray;
     this.equipment = {
-        Helm: equipmentArray[0],
-        Chest: equipmentArray[2],
-        Boots: equipmentArray[1],
-        Weapon: inventoryArray[1]
+        Helm: itemsArray[0],
+        Chest: itemsArray[2],
+        Boots: itemsArray[1],
+        Weapon: itemsArray[4]
     }
     this.armor = 0;
 }
@@ -60,7 +61,7 @@ function start() {
         a torch from the fire.
         `,
         actions = [
-            {htmlElement: 'button', htmlText: 'Go through hole', htmlId: 'actions', classes: 'btn btn-primary'}
+            {htmlElement: 'button', htmlText: 'Follow Cave', classes: 'btn btn-primary', id: 'action1'}
         ],
         enemies = [enemiesArray[0]]
     );
@@ -72,7 +73,7 @@ function start() {
 function updateGameBoard(gameBoardText, actions, enemies) {
     gameBoard.innerHTML = gameBoardText;
     actions.forEach(element => {
-        createElement(element.htmlElement, element.htmlText, element.htmlId, element.classes);
+        createElement(element.htmlElement, element.htmlText, 'actions', element.classes);
     });
     for (let key of enemies) {
         updateEnemies(key.name, key.health);
@@ -119,7 +120,7 @@ function updateEquipment() {
 //htmlText = the text to be place within the tag
 //htmlId = the id to append the new element to ex. the id of <ul> if adding a <li> 
 //classes = any class wanting to be added to the new html element being made
-function createElement(htmlElement, htmlText, htmlId , classes) {
+function createElement(htmlElement, htmlText, htmlId , classes, id) {
     //creating the html element
     const createElement = document.createElement(htmlElement);
     const createText = document.createTextNode(htmlText);
@@ -132,6 +133,9 @@ function createElement(htmlElement, htmlText, htmlId , classes) {
     //adding classes to the new element
     if (classes) {
         createElement.setAttribute('class', classes);
+    }
+    if (id) {
+        createElement.setAttribute('id', id);
     }
     
     //testing purposes
