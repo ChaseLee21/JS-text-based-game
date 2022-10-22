@@ -10,7 +10,8 @@ let inventoryArray = [
     itemsArray[3]
 ]; //array of current items in inventory
 let enemiesArray = [
-    new Enemy('Unknown Body', 0, 0, 0)
+    new Enemy('Unknown Body', 0, 0, 0),
+    new Enemy('Skeever', 8, 0, 1)
 ]; //array of all enemies in game
 let chase = new Character(100); 
 let gameBoard = document.getElementById('gameBoard'); 
@@ -73,7 +74,7 @@ function start() {
 function updateGameBoard(gameBoardText, actions, enemies) {
     gameBoard.innerHTML = gameBoardText;
     actions.forEach(element => {
-        createElement(element.htmlElement, element.htmlText, 'actions', element.classes);
+        createElement(element.htmlElement, element.htmlText, 'actions', element.classes, element.id);
     });
     for (let key of enemies) {
         updateEnemies(key.name, key.health);
