@@ -56,6 +56,7 @@ function start() {
     updateInventory();
     updateEquipment();
     updateGameBoard(
+        clear = "",
         gameBoardText = `
         You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
         She doesn't appear to be someone you know but you don't remember much. You loot a Cooper Shortsword from her body and lit
@@ -71,7 +72,10 @@ function start() {
 }
 
 //Updates the game board DOM
-function updateGameBoard(gameBoardText, actions, enemies) {
+function updateGameBoard(clear, gameBoardText, actions, enemies) {
+    if (clear) {
+        clearBoard(clear);
+    }
     gameBoard.innerHTML = gameBoardText;
     actions.forEach(element => {
         createElement(element.htmlElement, element.htmlText, 'actions', element.classes, element.id);
@@ -84,6 +88,8 @@ function updateGameBoard(gameBoardText, actions, enemies) {
 
 //updates the DOM element 'enemies'
 function updateEnemies(name, health) {
+    clearBoard(['enemies']);
+    createElement('ul', '', 'enemiesDiv', '', 'enemies');
     createElement('li', name + ': ' + health, 'enemies');
 }
 
@@ -115,6 +121,11 @@ function updateEquipment() {
      } 
 }
 
+//Clears gameboard for next room
+function clearBoard(clear) {
+    console.log(clear);
+    document.getElementById(clear[0]).remove();
+}
 
 //can be called to create a new html element on the home page
 //htmlElement = html tag being created
@@ -140,6 +151,6 @@ function createElement(htmlElement, htmlText, htmlId , classes, id) {
     }
     
     //testing purposes
-    console.log(createElement, createText, setId);
+    //console.log(createElement, createText, setId);
 }
 
