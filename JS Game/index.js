@@ -1,4 +1,5 @@
 // Initializing Global Variables
+
 let itemsArray = [
     new Equipment('None', 0, 0),
     new Equipment('Torn Leather Boots', 3, 2),
@@ -6,13 +7,26 @@ let itemsArray = [
     new Item('Torch', 0, 0),
     new Item('Copper Shortsword', 1, 2)
 ]; //array of all items
+
 let inventoryArray = [
     itemsArray[3]
 ]; //array of current items in inventory
+
 let enemiesArray = [
     new Enemy('Unknown Body', 0, 0, 0),
     new Enemy('Skeever', 8, 0, 1)
 ]; //array of all enemies in game
+
+let roomArray = [
+    new Room(`Welcome to Chase's Game`,
+    `You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
+    She doesn't appear to be someone you know but you don't remember much. You loot a Cooper Shortsword from her body and lit
+    a torch from the fire.`,
+    [enemiesArray[0], enemiesArray[1]],
+    [new Action('Follow Cave')]
+    )
+]; //array of all rooms 
+
 let chase = new Character(100); 
 let gameBoard = document.getElementById('gameBoard'); 
 start();
@@ -51,52 +65,24 @@ function Equipment(name, type, armor){
     this.armor = armor;
 }
 
+//Room constructor 
+function Room(name, text, enemies, actions) {
+    this.name = name;
+    this.text = text;
+    this.enemies = enemies;
+    this.actions = actions;
+}
+
+function Action(text) {
+    this.text = text;
+}
+
 //Starts the game by updating all the DOM elements
 function start() {
     updateInventory();
     updateEquipment();
-    updateGameBoard(
-        clear = "",
-        gameBoardText = `
-        You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
-        She doesn't appear to be someone you know but you don't remember much. You loot a Cooper Shortsword from her body and lit
-        a torch from the fire.
-        `,
-        actions = [
-            {htmlElement: 'button', htmlText: 'Follow Cave', classes: 'btn btn-primary', id: 'action1'}
-        ],
-        enemies = [enemiesArray[0]]
-    );
-    updateRoom(`Welcome to Chase's Game`);
+    updateGameBoard(roomArray[0]);
     updateStatus();
-}
-
-//Updates the game board DOM
-function updateGameBoard(clear, gameBoardText, actions, enemies) {
-    if (clear) {
-        clearBoard(clear);
-    }
-    gameBoard.innerHTML = gameBoardText;
-    actions.forEach(element => {
-        createElement(element.htmlElement, element.htmlText, 'actions', element.classes, element.id);
-    });
-    for (let key of enemies) {
-        updateEnemies(key.name, key.health);
-    }
-
-}
-
-//updates the DOM element 'enemies'
-function updateEnemies(name, health) {
-    clearBoard(['enemies']);
-    createElement('ul', '', 'enemiesDiv', '', 'enemies');
-    createElement('li', name + ': ' + health, 'enemies');
-}
-
-//updates the DOM element 'roomName'
-function updateRoom(text) {
-    let roomTitle = document.getElementById('roomName');
-    roomTitle.innerHTML = text;
 }
 
 //updates the Dom element 'status'
@@ -123,8 +109,9 @@ function updateEquipment() {
 
 //Clears gameboard for next room
 function clearBoard(clear) {
-    console.log(clear);
-    document.getElementById(clear[0]).remove();
+    for (let key in clear) {
+        document.getElementById(clear[key]).remove();
+    }
 }
 
 //can be called to create a new html element on the home page
