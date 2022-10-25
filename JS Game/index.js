@@ -134,7 +134,7 @@ function updateEquipment() {
 //htmlText = the text to be place within the tag
 //htmlId = the id to append the new element to ex. the id of <ul> if adding a <li> 
 //classes = any class wanting to be added to the new html element being made
-function createElement(htmlElement, htmlText, htmlId , classes, id) {
+function createElement(htmlElement, htmlText, htmlId , classes, id, style) {
     //creating the html element
     const createElement = document.createElement(htmlElement);
     const createText = document.createTextNode(htmlText);
@@ -151,8 +151,10 @@ function createElement(htmlElement, htmlText, htmlId , classes, id) {
     if (id) {
         createElement.setAttribute('id', id);
     }
+    if (style) {
+        createElement.setAttribute('style', style);
+    }
     
     //testing purposes
     //console.log(createElement, createText, setId);
 }
-

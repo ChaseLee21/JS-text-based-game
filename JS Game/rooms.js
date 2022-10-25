@@ -13,15 +13,24 @@ function updateGameBoard(room) {
 //updates the DOM element 'enemies' should only be called in the 'updateGameBoard' function
 function updateEnemies(enemies) {
     clearBoard(['enemiesDIV']);
+    console.log(enemies);
     for (let enemy of enemies) {
+        if(enemy.health === 0) {
         createElement('div', '', 'enemiesBoard', '', 'enemiesDIV');
         createElement('div', '', 'enemiesDIV', 'card bg-dark', 'enemy' + enemy);
         createElement('div', '', 'enemy' + enemy, 'card-body', 'cardBody' + enemy);
-        createElement('h1', enemy.name, 'enemy' + enemy, 'pb-2', 'cardTitle' + enemy);
+        createElement('h1', enemy.name, 'enemy' + enemy, '', 'cardTitle' + enemy);
         createElement('ul', '', 'cardTitle' + enemy, 'card-text', 'enemies');
-        createElement('li', 'Health: ' + enemy.health, 'enemies', 'list-group-item list-group-item-dark');
-        createElement('li', 'Armor: ' + enemy.armor, 'enemies', 'list-group-item list-group-item-dark');
-        
+        createElement('li', 'Dead', 'enemies', 'list-group-item list-group-item-dark');
+        } else {
+            createElement('div', '', 'enemiesBoard', '', 'enemiesDIV');
+            createElement('div', '', 'enemiesDIV', 'card bg-dark', 'enemy' + enemy.name, 'width: 18rem');
+            createElement('div', '', 'enemy' + enemy.name, 'card-body', 'cardBody' + enemy.name);
+            createElement('h1', enemy.name, 'cardBody' + enemy.name, '', 'cardTitle' + enemy.name);
+            createElement('ul', '', 'cardTitle' + enemy.name, 'card-text', 'enemies');
+            createElement('li', 'Health: ' + enemy.health, 'enemies', 'list-group-item list-group-item-dark');
+            createElement('li', 'Armor: ' + enemy.armor, 'enemies', 'list-group-item list-group-item-dark');
+        }
     }
 }
 
