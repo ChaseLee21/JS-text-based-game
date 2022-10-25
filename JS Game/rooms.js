@@ -12,10 +12,16 @@ function updateGameBoard(room) {
 
 //updates the DOM element 'enemies' should only be called in the 'updateGameBoard' function
 function updateEnemies(enemies) {
-    clearBoard(['enemies']);
-    createElement('ul', '', 'enemiesDiv', '', 'enemies');
+    clearBoard(['enemiesDIV']);
     for (let enemy of enemies) {
-        createElement('li', enemy.name + ': ' + enemy.health, 'enemies');
+        createElement('div', '', 'enemiesBoard', '', 'enemiesDIV');
+        createElement('div', '', 'enemiesDIV', 'card bg-dark', 'enemy' + enemy);
+        createElement('div', '', 'enemy' + enemy, 'card-body', 'cardBody' + enemy);
+        createElement('h1', enemy.name, 'enemy' + enemy, 'pb-2', 'cardTitle' + enemy);
+        createElement('ul', '', 'cardTitle' + enemy, 'card-text', 'enemies');
+        createElement('li', 'Health: ' + enemy.health, 'enemies', 'list-group-item list-group-item-dark');
+        createElement('li', 'Armor: ' + enemy.armor, 'enemies', 'list-group-item list-group-item-dark');
+        
     }
 }
 
@@ -39,7 +45,7 @@ function updateRoomName(text) {
 //Clears gameboard for next room 
 function clearBoard(clear) {
     for (let key in clear) {
-        //console.log(clear[key]);
+        console.log(clear[key]);
         document.getElementById(clear[key]).remove();
     }
 }
