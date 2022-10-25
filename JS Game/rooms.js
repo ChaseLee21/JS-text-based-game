@@ -11,25 +11,27 @@ function updateGameBoard(room) {
 }
 
 //updates the DOM element 'enemies' should only be called in the 'updateGameBoard' function
+// Creates bootstrap card for each enemy showing name health and armor
+// If enemy is dead creates bootstrap card showing name and dead
 function updateEnemies(enemies) {
     clearBoard(['enemiesDIV']);
     console.log(enemies);
     for (let enemy of enemies) {
         if(enemy.health === 0) {
-        createElement('div', '', 'enemiesBoard', '', 'enemiesDIV');
-        createElement('div', '', 'enemiesDIV', 'card bg-dark', 'enemy' + enemy);
-        createElement('div', '', 'enemy' + enemy, 'card-body', 'cardBody' + enemy);
-        createElement('h1', enemy.name, 'enemy' + enemy, '', 'cardTitle' + enemy);
-        createElement('ul', '', 'cardTitle' + enemy, 'card-text', 'enemies');
-        createElement('li', 'Dead', 'enemies', 'list-group-item list-group-item-dark');
+            createElement('div', '', 'enemiesBoard', 'd-flex justify-content-center', 'enemiesDIV');
+            createElement('div', '', 'enemiesDIV', 'card text-dark d-flex justify-content-center', 'enemy' + enemy.name, 'width: 12rem');
+            createElement('h2', enemy.name, 'enemy' + enemy.name, 'card-header', 'cardTitle' + enemy.name);
+            createElement('div', '', 'cardTitle' + enemy.name, 'card-body', 'cardBody' + enemy.name);
+            createElement('div', '', 'cardBody' + enemy.name, 'card-text', 'enemies');
+            createElement('div', 'Dead', 'enemies', 'fs-4');
         } else {
-            createElement('div', '', 'enemiesBoard', '', 'enemiesDIV');
-            createElement('div', '', 'enemiesDIV', 'card bg-dark', 'enemy' + enemy.name, 'width: 18rem');
-            createElement('div', '', 'enemy' + enemy.name, 'card-body', 'cardBody' + enemy.name);
-            createElement('h1', enemy.name, 'cardBody' + enemy.name, '', 'cardTitle' + enemy.name);
-            createElement('ul', '', 'cardTitle' + enemy.name, 'card-text', 'enemies');
-            createElement('li', 'Health: ' + enemy.health, 'enemies', 'list-group-item list-group-item-dark');
-            createElement('li', 'Armor: ' + enemy.armor, 'enemies', 'list-group-item list-group-item-dark');
+            createElement('div', '', 'enemiesBoard', 'd-flex justify-content-center', 'enemiesDIV');
+            createElement('div', '', 'enemiesDIV', 'card text-dark d-flex justify-content-center', 'enemy' + enemy.name, 'width: 12rem');
+            createElement('h2', enemy.name, 'enemy' + enemy.name, 'card-header', 'cardTitle' + enemy.name);
+            createElement('div', '', 'cardTitle' + enemy.name, 'card-body', 'cardBody' + enemy.name);
+            createElement('div', '', 'cardBody' + enemy.name, 'card-text', 'enemies');
+            createElement('div', 'Health: ' + enemy.health, 'enemies', 'fs-4');
+            createElement('div', 'Armor: ' + enemy.armor, 'enemies', 'fs-4');
         }
     }
 }

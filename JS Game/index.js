@@ -105,11 +105,11 @@ function start() {
 //updates the Dom element 'status'
 function updateStatus() {
     clearBoard(['status']);
-    createElement('ul', '', 'statusDIV', 'card-text', 'status');
-    createElement('li', 'Health: ' + chase.health, 'status', 'list-group-item list-group-item-dark');
-    createElement('li', 
+    createElement('div', '', 'statusDIV', 'card-text', 'status');
+    createElement('div', 'Health: ' + chase.health, 'status', 'fs-2');
+    createElement('div', 
     'Armor: ' + (chase.equipment.Boots.armor + chase.equipment.Chest.armor + chase.equipment.Helm.armor), 
-    'status', 'list-group-item list-group-item-dark');
+    'status', 'fs-2');
 }
 
 //updates the DOM element 'inventory'
