@@ -24,7 +24,7 @@ function updateActions(actions){
     clearBoard(['actions']); //clears current actions on the game board
     createElement('ul', '', 'actionsDiv', '', 'actions'); //creates a new Div to place the new actions inside
     for (let action of actions) { 
-        console.log(action);
+        //console.log(action);
         createElement('li', action.text, 'actions', 'btn btn-primary', 'action' + action.text.replace(' ', ''));
         document.getElementById('action' + action.text.replace(' ', '')).addEventListener('click', action.action);
     }
@@ -39,7 +39,7 @@ function updateRoomName(text) {
 //Clears gameboard for next room 
 function clearBoard(clear) {
     for (let key in clear) {
-        console.log(clear[key]);
+        //console.log(clear[key]);
         document.getElementById(clear[key]).remove();
     }
 }

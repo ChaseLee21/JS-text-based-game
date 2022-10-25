@@ -1,3 +1,9 @@
+
+
+//TODO
+//add a combat system that rewards loot
+
+
 // Initializing Global Variables
 
 let itemsArray = [
@@ -25,7 +31,7 @@ let roomArray = [
         [enemiesArray[0]],
         [new Action('Follow Passage', () => { updateGameBoard(roomArray[1]) } )]
     ),
-    new Room(`Placeholder`, 
+    new Room(`Skeever attack`, 
         `You follow the passage lit by the torch you crafted. A horid stench becomes more profound as you continue down the path.
         As the passage opens up into a wider room you see skeevers scatter as the light from your torch hits their body's. 
         A dead body reveals itself and one brave soldier from the pack stays behind looking for a fight.`,
@@ -34,12 +40,13 @@ let roomArray = [
     )
 ]; //array of all rooms 
 
-let chase = new Character(100); 
+let chase = new Character(100); //TODO, let the player name their own character
 let gameBoard = document.getElementById('gameBoard'); 
 start();
 
 // Character constructor
 function Character(health) {
+    this.name = 'chase';
     this.health = health
     this.inventory = inventoryArray;
     this.equipment = {
@@ -59,6 +66,7 @@ function Enemy(name, health, armor, damage) {
     this.damage = damage;
 }
 
+//Item constructor
 function Item(name, type, damage) {
     this.name = name;
     this.type = type;
@@ -72,7 +80,7 @@ function Equipment(name, type, armor){
     this.armor = armor;
 }
 
-//Room constructor 
+//Room constructor
 function Room(name, text, enemies, actions) {
     this.name = name;
     this.text = text;
@@ -80,6 +88,7 @@ function Room(name, text, enemies, actions) {
     this.actions = actions;
 }
 
+//Action constructor first param = btn text, second param = anonymous function
 function Action(text, action) {
     this.text = text;
     this.action = action;
@@ -95,13 +104,16 @@ function start() {
 
 //updates the Dom element 'status'
 function updateStatus() {
-    createElement('li', 'Health: ' + chase.health, 'status');
+    clearBoard(['status']);
+    createElement('ul', '', 'statusDIV', 'card-text', 'status');
+    createElement('li', 'Health: ' + chase.health, 'status', 'list-group-item list-group-item-dark');
     createElement('li', 
     'Armor: ' + (chase.equipment.Boots.armor + chase.equipment.Chest.armor + chase.equipment.Helm.armor), 
-    'status');
+    'status', 'list-group-item list-group-item-dark');
 }
 
 //updates the DOM element 'inventory'
+//TODO add a remove method 
 function updateInventory() {
     for (let key of chase.inventory) {
         createElement('li', key.name, 'inventory');
@@ -109,6 +121,7 @@ function updateInventory() {
 }
 
 //updates the DOM element 'character' aka gear that is equiped
+//TODO add a remove method
 function updateEquipment() {
     for (let key in chase.equipment) {
         createElement('li', key + ': ' + chase.equipment[key].name, 'character');
