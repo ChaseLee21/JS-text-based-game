@@ -19,11 +19,18 @@ let enemiesArray = [
 
 let roomArray = [
     new Room(`Welcome to Chase's Game`,
-    `You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
-    She doesn't appear to be someone you know but you don't remember much. You loot a Cooper Shortsword from her body and lit
-    a torch from the fire.`,
-    [enemiesArray[0], enemiesArray[1]],
-    [new Action('Follow Cave')]
+        `You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
+        She doesn't appear to be someone you know but you don't remember much. You loot a Cooper Shortsword from her body and lit
+        a torch from the fire. In this room there is a narrow passage with no light coming from it.`,
+        [enemiesArray[0]],
+        [new Action('Follow Passage', () => { updateGameBoard(roomArray[1]) } )]
+    ),
+    new Room(`Placeholder`, 
+        `You follow the passage lit by the torch you crafted. A horid stench becomes more profound as you continue down the path.
+        As the passage opens up into a wider room you see skeevers scatter as the light from your torch hits their body's. 
+        A dead body reveals itself and one brave soldier from the pack stays behind looking for a fight.`,
+        [enemiesArray[1]],
+        []
     )
 ]; //array of all rooms 
 
@@ -73,8 +80,9 @@ function Room(name, text, enemies, actions) {
     this.actions = actions;
 }
 
-function Action(text) {
+function Action(text, action) {
     this.text = text;
+    this.action = action;
 }
 
 //Starts the game by updating all the DOM elements
@@ -107,12 +115,6 @@ function updateEquipment() {
      } 
 }
 
-//Clears gameboard for next room
-function clearBoard(clear) {
-    for (let key in clear) {
-        document.getElementById(clear[key]).remove();
-    }
-}
 
 //can be called to create a new html element on the home page
 //htmlElement = html tag being created
