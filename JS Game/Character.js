@@ -1,3 +1,19 @@
+// Character constructor
+class Character {
+    constructor(health) {
+        this.name = 'chase';
+        this.health = health;
+        this.inventory = inventoryArray;
+        this.equipment = {
+            Helm: itemsArray[0],
+            Chest: itemsArray[2],
+            Boots: itemsArray[1],
+            Weapon: itemsArray[4]
+        };
+        this.armor = 0;
+    }
+}
+
 //updates the Dom element 'status'
 function updateStatus() {
     clearBoard(['status']);

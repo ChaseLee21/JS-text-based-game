@@ -1,3 +1,13 @@
+//Room constructor
+class Room {
+    constructor(name, text, enemies, actions) {
+        this.name = name;
+        this.text = text;
+        this.enemies = enemies;
+        this.actions = actions;
+    }
+}
+
 //rooms.js includes all functions oriented around moving through the different rooms in the game
 //the most important function here is 'updateGameBoard'  
 

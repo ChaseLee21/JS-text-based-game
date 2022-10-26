@@ -1,3 +1,18 @@
+// Enemy constructor 
+class Enemy {
+    constructor(name, health, armor, damage, alive) {
+        this.name = name;
+        this.health = health;
+        this.armor = armor;
+        this.damage = damage;
+        if (alive) {
+            this.alive = alive;
+        }
+        else
+            this.alive = true;
+    }
+}
+
 function attackEnemy(id) {
     let enemy = combatArray.find(element => element.id === id);
     let damage = chase.equipment.Weapon.damage;
