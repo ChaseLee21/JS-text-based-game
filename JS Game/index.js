@@ -102,59 +102,35 @@ function start() {
     updateStatus();
 }
 
-//updates the Dom element 'status'
-function updateStatus() {
-    clearBoard(['status']);
-    createElement('div', '', 'statusDIV', 'card-text', 'status');
-    createElement('div', 'Health: ' + chase.health, 'status', 'fs-2');
-    createElement('div', 
-    'Armor: ' + (chase.equipment.Boots.armor + chase.equipment.Chest.armor + chase.equipment.Helm.armor), 
-    'status', 'fs-2');
+//These three functions are used to create new elements on the DOM
+//they are seperated from each other for easier use
+//the only mandatory param is appendingElement 
+function createElementDiv(appendingElement, id, classes, style) {
+    const createElement = document.createElement('div');
+    const appendElement = document.getElementById(appendingElement);
+    appendElement.appendChild(createElement);
+    if (id) createElement.setAttribute('id', id);
+    if (classes) createElement.setAttribute('class', classes);
+    if (style) createElement.setAttribute('style', style);
+
 }
 
-//updates the DOM element 'inventory'
-//TODO add a remove method 
-function updateInventory() {
-    for (let key of chase.inventory) {
-        createElement('li', key.name, 'inventory');
-    }
-}
-
-//updates the DOM element 'character' aka gear that is equiped
-//TODO add a remove method
-function updateEquipment() {
-    for (let key in chase.equipment) {
-        createElement('li', key + ': ' + chase.equipment[key].name, 'character');
-     } 
-}
-
-
-//can be called to create a new html element on the home page
-//htmlElement = html tag being created
-//htmlText = the text to be place within the tag
-//htmlId = the id to append the new element to ex. the id of <ul> if adding a <li> 
-//classes = any class wanting to be added to the new html element being made
-function createElement(htmlElement, htmlText, htmlId , classes, id, style) {
-    //creating the html element
-    const createElement = document.createElement(htmlElement);
-    const createText = document.createTextNode(htmlText);
-    const setId = document.getElementById(htmlId);
-
-    //adding the element to the DOM
+function createElementButton(appendingElement, id, text, classes) {
+    const createElement = document.createElement('button');
+    const createText = document.createTextNode(text);
+    const appendElement = document.getElementById(appendingElement);
     createElement.appendChild(createText);
-    setId.appendChild(createElement);
+    appendElement.appendChild(createElement);
+    if (id) createElement.setAttribute('id', id);
+    if (classes) createElement.setAttribute('class', 'btn ' + classes);
+}
 
-    //adding classes to the new element
-    if (classes) {
-        createElement.setAttribute('class', classes);
-    }
-    if (id) {
-        createElement.setAttribute('id', id);
-    }
-    if (style) {
-        createElement.setAttribute('style', style);
-    }
-    
-    //testing purposes
-    //console.log(createElement, createText, setId);
+function createElementText(appendingElement, id, type, text, classes) {
+    const createElement = document.createElement(type);
+    const createText = document.createTextNode(text);
+    const appendElement = document.getElementById(appendingElement);
+    createElement.appendChild(createText);
+    appendElement.appendChild(createElement);
+    if (id) createElement.setAttribute('id', id);
+    if (classes) createElement.setAttribute('class', classes);
 }
