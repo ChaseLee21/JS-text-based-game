@@ -15,34 +15,36 @@ function updateGameBoard(room) {
 // If enemy is dead creates bootstrap card showing name and dead
 function updateEnemies(enemies) {
     clearBoard(['enemiesDIV']);
-    console.log(enemies);
     for (let enemy of enemies) {
+        let name = enemy.name.replace(' ', '');
         if(enemy.health === 0) {
-            createElement('div', '', 'enemiesBoard', 'd-flex justify-content-center', 'enemiesDIV');
-            createElement('div', '', 'enemiesDIV', 'card text-dark d-flex justify-content-center', 'enemy' + enemy.name, 'width: 12rem');
-            createElement('h2', enemy.name, 'enemy' + enemy.name, 'card-header', 'cardTitle' + enemy.name);
-            createElement('div', '', 'cardTitle' + enemy.name, 'card-body', 'cardBody' + enemy.name);
-            createElement('div', '', 'cardBody' + enemy.name, 'card-text', 'enemies');
-            createElement('div', 'Dead', 'enemies', 'fs-4');
+            createElementDiv('enemiesBoard', 'enemiesDIV', 'd-flex justify-content-center');
+            createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
+            createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
+            createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
+            createElementDiv('cardBody' + name, 'enemies', 'card-body');
+            createElementText('enemies', '', 'div', 'Dead', 'fs-4');
         } else {
-            createElement('div', '', 'enemiesBoard', 'd-flex justify-content-center', 'enemiesDIV');
-            createElement('div', '', 'enemiesDIV', 'card text-dark d-flex justify-content-center', 'enemy' + enemy.name, 'width: 12rem');
-            createElement('h2', enemy.name, 'enemy' + enemy.name, 'card-header', 'cardTitle' + enemy.name);
-            createElement('div', '', 'cardTitle' + enemy.name, 'card-body', 'cardBody' + enemy.name);
-            createElement('div', '', 'cardBody' + enemy.name, 'card-text', 'enemies');
-            createElement('div', 'Health: ' + enemy.health, 'enemies', 'fs-4');
-            createElement('div', 'Armor: ' + enemy.armor, 'enemies', 'fs-4');
+            createElementDiv('enemiesBoard', 'enemiesDIV', 'd-flex justify-content-center');
+            createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
+            createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
+            createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
+            createElementDiv('cardBody' + name, 'enemies', 'card-body');
+            createElementText('enemies', '', 'div', 'Health: ' + enemy.health, 'fs-4');
+            createElementText('enemies', '', 'div', 'Armor: ' + enemy.armor, 'fs-4');
+            createElementButton('enemies', 'attack' + name, 'Attack', 'btn-primary')
+            document.getElementById('attack' + name).addEventListener('click', () => { attackEnemy(enemy.health, enemy.armor) });
         }
     }
 }
 
+
 //updates the DOM element 'actions' should only be called in the 'updateGameBoard' function
 function updateActions(actions){
     clearBoard(['actions']); //clears current actions on the game board
-    createElement('ul', '', 'actionsDiv', '', 'actions'); //creates a new Div to place the new actions inside
+    createElementDiv('actionsDiv', 'actions');
     for (let action of actions) { 
-        //console.log(action);
-        createElement('li', action.text, 'actions', 'btn btn-primary', 'action' + action.text.replace(' ', ''));
+        createElementButton('actions', 'action' + action.text.replace(' ', ''), action.text, 'btn-primary');
         document.getElementById('action' + action.text.replace(' ', '')).addEventListener('click', action.action);
     }
 }
@@ -56,7 +58,6 @@ function updateRoomName(text) {
 //Clears gameboard for next room 
 function clearBoard(clear) {
     for (let key in clear) {
-        console.log(clear[key]);
         document.getElementById(clear[key]).remove();
     }
 }
