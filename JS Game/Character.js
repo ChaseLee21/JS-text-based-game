@@ -1,4 +1,9 @@
-// Character constructor
+
+/* 
+class used to create the player character
+should only be used once when initializing the game
+*/
+
 class Character {
     constructor(health) {
         this.name = 'chase';
@@ -14,10 +19,13 @@ class Character {
     }
 }
 
-//updates the Dom element 'status'
+/* 
+updateStatus() is used to update the DOM with accurate player stats 
+ex. Health & Armor
+TODO make two seperate functions, 1 that initializes the player DOM and another that updates it
+*/
 function updateStatus() {
     clearBoard(['status']);
-
     createElementDiv('statusDIV', 'status', 'card-text');
     createElementText('status', '', 'div', 'Health: ' + chase.health, 'fs-2');
     createElementText('status', '', 'div', 
@@ -25,16 +33,18 @@ function updateStatus() {
     'fs-2');
 }
 
-//updates the DOM element 'inventory'
-//TODO add a remove method 
+/*
+Updates the DOM to show accurate player inventory
+*/
 function updateInventory() {
     for (let key of chase.inventory) {
         createElementText('inventory', '', 'div', key.name);
     }
 }
 
-//updates the DOM element 'character' aka gear that is equiped
-//TODO add a remove method
+/*
+Updates the DOM to show accurate player equipment
+*/
 function updateEquipment() {
     for (let key in chase.equipment) {
         createElementText('character', '', 'div', key + ': ' + chase.equipment[key].name);

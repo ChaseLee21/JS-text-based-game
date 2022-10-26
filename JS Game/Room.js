@@ -1,4 +1,16 @@
-//Room constructor
+
+
+/* 
+this class is called in the roomsArray[] only
+name = the h1 title at the top of the screen that display the room name
+text = the game text in <p> that tells the story of whats happening
+enemies = an array that references the enemiesArray[] 
+    ex. [[enemiesArray[1], [enemiesArray[2]] this would create two new enemies on the board 
+    the new enemies are cloned into combatArray[] where we can initiate combat with them in Enemy.js
+actions = an array that references the class Action()
+    ex. [new Action('follow cave', () => { updateGameBoard(roomArray[1]) })]
+*/
+
 class Room {
     constructor(name, text, enemies, actions) {
         this.name = name;
@@ -8,10 +20,16 @@ class Room {
     }
 }
 
-//rooms.js includes all functions oriented around moving through the different rooms in the game
-//the most important function here is 'updateGameBoard'  
 
-//Updates the game board DOM by passing a room from the roomArray
+/* 
+updateGameBoard(room) updates the DOM to the next room
+this function is called in two places
+    1. start()
+    2. Action() class
+its only parameter is an Room class object which has 4 properties tied to it
+it uses these 4 properties to update the DOM
+*/
+
 function updateGameBoard(room) {
     gameBoard.innerHTML = room.text;
     combatArray = room.enemies;
@@ -20,7 +38,10 @@ function updateGameBoard(room) {
     updateRoomName(room.name);
 }
 
-//updates the DOM element 'actions' should only be called in the 'updateGameBoard' function
+/* 
+called only in updateGameBoard()
+clears current actions and updates the DOM to show the new ones
+*/
 function updateActions(actions){
     clearBoard(['actions']); //clears current actions on the game board
     createElementDiv('actionsDiv', 'actions');
@@ -30,13 +51,20 @@ function updateActions(actions){
     }
 }
 
-//updates the DOM element 'roomName' should only be called in the 'updateGameBoard' function
+/* 
+called only in updateGameBoard()
+updates the DOM to show the new room name
+*/
 function updateRoomName(text) {
     let roomTitle = document.getElementById('roomName');
     roomTitle.innerHTML = text;
 }
 
-//Clears gameboard for next room 
+/* 
+requires an arry as the param
+this array only contains the id's of html elements ex. clear = ['actions', 'status']
+removes the elements passed in the param from the DOM
+*/
 function clearBoard(clear) {
     for (let key in clear) {
         document.getElementById(clear[key]).remove();
