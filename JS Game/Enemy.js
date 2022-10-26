@@ -30,7 +30,6 @@ function attackEnemy(id) {
     if (enemy.health <= 0) {
         enemy.alive = false;
     }
-    console.log(enemy, enemy.health);
     updateEnemies(id, enemy);
 }
 
@@ -39,9 +38,9 @@ gets called from within attackEnemy()
 updates the DOM to show accurate health 
 */
 async function updateEnemies(id, enemy) {
-    const health = document.getElementById(id + 'Health');
-    const armor = document.getElementById(id + 'Armor');
-    const attackBtn = document.getElementById(id + 'Attack');
+    const health = document.getElementById(enemy.name + id + 'Health');
+    const armor = document.getElementById(enemy.name + id + 'Armor');
+    const attackBtn = document.getElementById(enemy.name + id + 'Attack');
     if(enemy.health <= 0) {
         health.innerHTML = 'Dead';
         armor.innerHTML = '';
@@ -63,29 +62,29 @@ updating enemy health after the card is created attackEnemy() is used instead
 */
 function createEnemies() {
     clearBoard(['enemiesDIV']);
-    for (let enemy of combatArray) {
-        let i = 1;
+    createElementDiv('enemiesBoard', 'enemiesDIV', 'd-flex justify-content-center');
+
+    for (let i = 0; i < combatArray.length; i++) {
+
+        let enemy = combatArray[i];
         enemy.id = i;
-        i++
-        let name = enemy.name.replace(' ', '');
-        console.log(enemy);
+        let name = enemy.name.replace(' ', '') + enemy.id;
+
         if(enemy.health === 0) {
-            createElementDiv('enemiesBoard', 'enemiesDIV', 'd-flex justify-content-center');
             createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
             createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
-            createElementDiv('cardBody' + name, 'enemies', 'card-body');
-            createElementText('enemies', '', 'div', 'Dead', 'fs-4');
+            createElementDiv('cardBody' + name, 'enemies' + name, 'card-body');
+            createElementText('enemies' + name, '', 'div', 'Dead', 'fs-4');
         } else {
-            createElementDiv('enemiesBoard', 'enemiesDIV', 'd-flex justify-content-center');
             createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
-            createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
-            createElementDiv('cardBody' + name, 'enemies', 'card-body');
-            createElementText('enemies', enemy.id + 'Health', 'div', 'Health: ' + enemy.health, 'fs-4');
-            createElementText('enemies', enemy.id + 'Armor', 'div', 'Armor: ' + enemy.armor, 'fs-4');
-            createElementButton('enemies', enemy.id + 'Attack', 'Attack', 'btn-primary')
-            document.getElementById(enemy.id + 'Attack').addEventListener('click', () => { attackEnemy(enemy.id) });
+            createElementDiv('cardTitle' + name, 'cardBody' + name);
+            createElementDiv('cardBody' + name, 'enemies' + name, 'card-body');
+            createElementText('enemies' + name, name + 'Health', 'div', 'Health: ' + enemy.health, 'fs-4');
+            createElementText('enemies' + name, name + 'Armor', 'div', 'Armor: ' + enemy.armor, 'fs-4');
+            createElementButton('enemies' + name, name + 'Attack', 'Attack', 'btn-primary')
+            document.getElementById(name + 'Attack').addEventListener('click', () => { attackEnemy(enemy.id) });
         }
     }
 }

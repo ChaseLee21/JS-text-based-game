@@ -44,7 +44,7 @@ let roomArray = [
     `You follow the passage lit by the torch you crafted. A horid stench becomes more profound as you continue down the path.
     As the passage opens up into a wider room you see skeevers scatter as the light from your torch hits their body's. 
     A dead body reveals itself and one brave soldier from the pack stays behind looking for a fight.`,
-    [enemiesArray[1]],
+    [enemiesArray[1], enemiesArray[1]],
     []
     )
 ]; //this array stores the different room encounters and is called from the action buttons
