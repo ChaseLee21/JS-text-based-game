@@ -1,6 +1,5 @@
 //TODO
 //add a combat system that rewards loot
-//add combat for the enemies to take the player
 //let the player name their own character
 
 
@@ -29,7 +28,7 @@ let combatArray = [
 
 let enemiesArray = [
     new Enemy('Unknown Body', 0, 0, 0, false),
-    new Enemy('Skeever', 8, 0, 1)
+    new Enemy('Skeever', 8, 0, 6)
 ]; //this array stores enemys to be called in the updateGameBoard()
 
 let roomArray = [
