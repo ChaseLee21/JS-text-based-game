@@ -4,40 +4,11 @@
 //Updates the game board DOM by passing a room from the roomArray
 function updateGameBoard(room) {
     gameBoard.innerHTML = room.text;
-    updateEnemies(room.enemies)
+    combatArray = room.enemies;
+    createEnemies();
     updateActions(room.actions);
     updateRoomName(room.name);
-
 }
-
-//updates the DOM element 'enemies' should only be called in the 'updateGameBoard' function
-// Creates bootstrap card for each enemy showing name health and armor
-// If enemy is dead creates bootstrap card showing name and dead
-function updateEnemies(enemies) {
-    clearBoard(['enemiesDIV']);
-    for (let enemy of enemies) {
-        let name = enemy.name.replace(' ', '');
-        if(enemy.health === 0) {
-            createElementDiv('enemiesBoard', 'enemiesDIV', 'd-flex justify-content-center');
-            createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
-            createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
-            createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
-            createElementDiv('cardBody' + name, 'enemies', 'card-body');
-            createElementText('enemies', '', 'div', 'Dead', 'fs-4');
-        } else {
-            createElementDiv('enemiesBoard', 'enemiesDIV', 'd-flex justify-content-center');
-            createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
-            createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
-            createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
-            createElementDiv('cardBody' + name, 'enemies', 'card-body');
-            createElementText('enemies', '', 'div', 'Health: ' + enemy.health, 'fs-4');
-            createElementText('enemies', '', 'div', 'Armor: ' + enemy.armor, 'fs-4');
-            createElementButton('enemies', 'attack' + name, 'Attack', 'btn-primary')
-            document.getElementById('attack' + name).addEventListener('click', () => { attackEnemy(enemy.health, enemy.armor) });
-        }
-    }
-}
-
 
 //updates the DOM element 'actions' should only be called in the 'updateGameBoard' function
 function updateActions(actions){

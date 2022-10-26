@@ -2,9 +2,8 @@
 
 //TODO
 //add a combat system that rewards loot
-
-
-// Initializing Global Variables
+//utilize the combatArray to store current enemies on the battlefield
+//
 
 let itemsArray = [
     new Equipment('None', 0, 0),
@@ -12,16 +11,20 @@ let itemsArray = [
     new Equipment('Cloth Robe', 2, 2),
     new Item('Torch', 0, 0),
     new Item('Copper Shortsword', 1, 2)
-]; //array of all items
+]; //this array stores all items that can be placed in inventoryArray[] later in the game
 
 let inventoryArray = [
     itemsArray[3]
-]; //array of current items in inventory
+]; //this array stores items in the players in current inventory
+
+let combatArray = [
+
+]; //this array stores the current enemys from enemiesArray[] on the battlefield both dead and alive
 
 let enemiesArray = [
-    new Enemy('Unknown Body', 0, 0, 0),
+    new Enemy('Unknown Body', 0, 0, 0, false),
     new Enemy('Skeever', 8, 0, 1)
-]; //array of all enemies in game
+]; //this array stores enemys to be called in the updateGameBoard()
 
 let roomArray = [
     new Room(`Welcome to Chase's Game`,
@@ -38,7 +41,7 @@ let roomArray = [
         [enemiesArray[1]],
         []
     )
-]; //array of all rooms 
+]; //this array stores the different room encounters and is called from the action buttons
 
 let chase = new Character(100); //TODO, let the player name their own character
 let gameBoard = document.getElementById('gameBoard'); 
@@ -59,11 +62,14 @@ function Character(health) {
 }
 
 // Enemy constructor 
-function Enemy(name, health, armor, damage) {
+function Enemy(name, health, armor, damage, alive) {
     this.name = name;
     this.health = health;
     this.armor = armor;
     this.damage = damage;
+    if (alive) { 
+        this.alive = alive;
+    } else this.alive = true;
 }
 
 //Item constructor
