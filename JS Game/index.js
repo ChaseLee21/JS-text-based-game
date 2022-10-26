@@ -1,15 +1,15 @@
-
-
 //TODO
 //add a combat system that rewards loot
 //add combat for the enemies to take the player
 //let the player name their own character
+
 
 /* 
 Start of array declarations
 These arrays store objects to be referenced to during the game
 Any item, room, or enemy is created in these arrays
 */
+
 
 let itemsArray = [
     new Equipment('None', 0, 0),
@@ -49,11 +49,21 @@ let roomArray = [
     )
 ]; //this array stores the different room encounters and is called from the action buttons
 
+
+/* 
+Initialize variables and start()
+*/
+
+
 let chase = new Character(100); 
 let gameBoard = document.getElementById('gameBoard'); 
 start();
 
-//Starts the game by updating all the DOM elements
+/* 
+Global function declarations
+*/
+
+//start() initializes the game by updating the DOM with the starting elements
 function start() {
     updateInventory();
     updateEquipment();
@@ -61,9 +71,11 @@ function start() {
     updateStatus();
 }
 
-//These three functions are used to create new elements on the DOM
-//they are seperated from each other for easier use
-//the only mandatory param is appendingElement 
+/* 
+createElement() functions are used to more easily create new elements on the DOM
+they are seperated from each other for easier understanding
+the only mandatory param is appendingElement as the new element has to append to an existing one 
+*/
 function createElementDiv(appendingElement, id, classes, style) {
     const createElement = document.createElement('div');
     const appendElement = document.getElementById(appendingElement);
