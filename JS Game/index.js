@@ -68,7 +68,7 @@ function start() {
     updateInventory();
     updateEquipment();
     updateGameBoard(roomArray[0]);
-    updateStatus();
+    initializeStatus();
 }
 
 /* 
@@ -104,4 +104,15 @@ function createElementText(appendingElement, id, type, text, classes) {
     appendElement.appendChild(createElement);
     if (id) createElement.setAttribute('id', id);
     if (classes) createElement.setAttribute('class', classes);
+}
+
+/* 
+requires an arry as the param
+this array only contains the id's of html elements ex. clear = ['actions', 'status']
+removes the elements passed in the param from the DOM
+*/
+function clearBoard(clear) {
+    for (let key in clear) {
+        document.getElementById(clear[key]).remove();
+    }
 }

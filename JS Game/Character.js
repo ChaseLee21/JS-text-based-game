@@ -15,22 +15,49 @@ class Character {
             Boots: itemsArray[1],
             Weapon: itemsArray[4]
         };
-        this.armor = 0;
+        this.armor = (
+            this.equipment.Helm.armor +
+            this.equipment.Chest.armor +
+            this.equipment.Boots.armor
+        );
     }
+}
+
+
+
+/* 
+called after an attack is made on the enemy
+this function will be the enemies 'turn'
+updates the players health afterwards
+*/
+function enemyAttack(id) {
+    let enemy = combatArray.find(element => element.id === id);
+    let damage = (enemy.damage - chase.armor);
+    console.log(enemy.damage, chase.armor, damage);
+    if (damage > 0) chase.health -= damage;
+    updateStatus();
+}
+
+/* 
+initializeStatus() used to initalize the DOM with starting player stats 
+TODO make two seperate functions, 1 that initializes the player DOM and another that updates it
+*/
+function initializeStatus() {
+    clearBoard(['status']);
+    createElementDiv('statusDIV', 'status', 'card-text');
+    createElementText('status', 'playerHealth', 'div', 'Health: ' + chase.health, 'fs-2');
+    createElementText('status', 'playerArmor', 'div', 
+    'Armor: ' + (chase.equipment.Boots.armor + chase.equipment.Chest.armor + chase.equipment.Helm.armor), 
+    'fs-2');
 }
 
 /* 
 updateStatus() is used to update the DOM with accurate player stats 
 ex. Health & Armor
-TODO make two seperate functions, 1 that initializes the player DOM and another that updates it
 */
 function updateStatus() {
-    clearBoard(['status']);
-    createElementDiv('statusDIV', 'status', 'card-text');
-    createElementText('status', '', 'div', 'Health: ' + chase.health, 'fs-2');
-    createElementText('status', '', 'div', 
-    'Armor: ' + (chase.equipment.Boots.armor + chase.equipment.Chest.armor + chase.equipment.Helm.armor), 
-    'fs-2');
+    document.getElementById('playerHealth').innerHTML = 'Health: ' + chase.health;
+    document.getElementById('playerArmor').innerHTML = 'Armor: ' + chase.armor;
 }
 
 /*

@@ -21,11 +21,15 @@ class Enemy {
 /* 
 attackEnemy(id) is called on click from the attack button
 this function only calculates damage it does not update the DOM
+after damage calculation checks to see if enemy is dead and updates enemy.alive if it is dead
 */
 function attackEnemy(id) {
     let enemy = combatArray.find(element => element.id === id);
     let damage = chase.equipment.Weapon.damage;
     enemy.health -= (damage - enemy.armor);
+    if (enemy.health <= 0) {
+        enemy.alive = false;
+    }
     console.log(enemy, enemy.health);
     updateEnemies(id, enemy);
 }
@@ -34,7 +38,7 @@ function attackEnemy(id) {
 gets called from within attackEnemy()
 updates the DOM to show accurate health 
 */
-function updateEnemies(id, enemy) {
+async function updateEnemies(id, enemy) {
     const health = document.getElementById(id + 'Health');
     const armor = document.getElementById(id + 'Armor');
     const attackBtn = document.getElementById(id + 'Attack');
@@ -42,11 +46,12 @@ function updateEnemies(id, enemy) {
         health.innerHTML = 'Dead';
         armor.innerHTML = '';
         attackBtn.remove();
-        enemy.alive = false;
     } else {
         health.innerHTML = 'Health: ' + enemy.health;
         armor.innerHTML = 'Armor: ' + enemy.armor;
     }
+    //await new Promise(resolve => setTimeout(resolve, 1000)); commented out because it can be abused
+    enemyAttack(id);
 }
 
 /* 

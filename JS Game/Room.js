@@ -32,7 +32,10 @@ it uses these 4 properties to update the DOM
 
 function updateGameBoard(room) {
     gameBoard.innerHTML = room.text;
-    combatArray = room.enemies;
+    combatArray = [];
+    for (let enemy of room.enemies) {
+        combatArray.push(structuredClone(enemy));
+    }
     createEnemies();
     updateActions(room.actions);
     updateRoomName(room.name);
@@ -60,14 +63,4 @@ function updateRoomName(text) {
     roomTitle.innerHTML = text;
 }
 
-/* 
-requires an arry as the param
-this array only contains the id's of html elements ex. clear = ['actions', 'status']
-removes the elements passed in the param from the DOM
-*/
-function clearBoard(clear) {
-    for (let key in clear) {
-        document.getElementById(clear[key]).remove();
-    }
-}
 
