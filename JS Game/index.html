@@ -19,8 +19,11 @@
         <h1 class="text-center" id="roomName">Welcome</h1>
     </div>
     <!-- game text container -->
-    <div class="row">
-        <p id="gameBoard" class="text-center">Click 'Start Game' to play</p>
+    <div class="row d-flex justify-content-center">
+        <div class="col-8">
+            <p id="gameBoard" class="text-center" style="height: 6rem;">Click 'Start Game' to play</p>
+
+        </div>
     </div>
     <!-- enemy container -->
     <div class="row text-center">
@@ -42,33 +45,45 @@
     </div>
 
     <br>
-    <!-- Inventory container -->
-    <div class="row text-center">
-        <h1>Inventory</h1>
-        <div id="inventoryDiv">
-            <div id="inventory">
-
-            </div>
-        </div>
-    </div>
-    <!-- Equipment container -->
-    <div class="row text-center">
-        <h1>Equipment</h1>
-        <div id="characterDiv">
-            <div id="character">
-
-            </div>
-        </div>
-    </div>
-    <!-- player status container -->
-    <div class="row text-center d-flex justify-content-center">
-        <div class="card text-dark" style="width: 600px;">
-            <div class="card-body" id="statusDIV">
-                <h1 class="pb-2" id="playerName">Player</h1>
-                <div class="card-text" id="status">
-
+    
+    <div class="row text-center d-flex justify-content-center m-2">
+        <div class="card-group text-dark">
+            
+            <!-- Equipment container -->
+            <div class="card col-4">
+                <div class="row text-center">
+                    <h1>Equipment</h1>
+                    <div id="characterDiv">
+                        <div id="character">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- player status container -->
+            <div class="card col-4">
+                <div class="card-body" id="statusDIV">
+                    <h1 class="pb-2" id="playerName">Player</h1>
+                    <div class="card-text" id="status">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Inventory container -->
+            <div class="card col-4">
+                <div class="row text-center">
+                    <h1>Inventory</h1>
+                    <div id="inventoryDiv">
+                        <div id="inventory">
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
