@@ -9,9 +9,10 @@ type
 */
 
 class Equipment {
-    constructor(name, type, armor) {
+    constructor(name, type, armor, lootChance) {
         this.name = name;
         this.type = type;
         this.armor = armor;
+        this.lootChance = lootChance;
     }
 }

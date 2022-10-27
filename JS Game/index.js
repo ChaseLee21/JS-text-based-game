@@ -10,15 +10,25 @@ Any item, room, or enemy is created in these arrays
 */
 
 
+
+/* 
+this array stores all items that can be placed in inventoryArray[] later in the game
+equipment = (name, type, armor, lootChance)
+item = (name, type, damage, lootChance)
+weapon = 1
+helm = 2
+chest = 3
+boots = 4
+*/
 let itemsArray = [
-    new Equipment('None', 0, 0),
-    new Equipment('Torn Leather Boots', 3, 2),
-    new Equipment('Cloth Robe', 2, 2),
-    new Item('Torch', 0, 0),
-    new Item('Copper Shortsword', 1, 2),
-    new Item('Skeevers Tooth', 1, 4, .5),
-    new Equipment('Cracked Mining Helmet', 1, 2, .9)
-]; //this array stores all items that can be placed in inventoryArray[] later in the game
+    new Equipment('None', 0, 0), //0
+    new Equipment('Torn Leather Boots', 4, 2), //1
+    new Equipment('Cloth Robe', 3, 2), //2
+    new Item('Torch', 0, 0), //3
+    new Item('Copper Shortsword', 1, 2), //4
+    new Item('Skeevers Tooth', 1, 4, .5), //5
+    new Equipment('Cracked Mining Helmet', 2, 2, .9) //6
+]; 
 
 let inventoryArray = [
     itemsArray[3]

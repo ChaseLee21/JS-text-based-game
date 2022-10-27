@@ -56,6 +56,11 @@ updateStatus() is used to update the DOM with accurate player stats
 ex. Health & Armor
 */
 function updateStatus() {
+    chase.armor = (
+        chase.equipment.Helm.armor +
+        chase.equipment.Chest.armor +
+        chase.equipment.Boots.armor
+    );
     document.getElementById('playerHealth').innerHTML = 'Health: ' + chase.health;
     document.getElementById('playerArmor').innerHTML = 'Armor: ' + chase.armor;
 }
@@ -68,12 +73,12 @@ function updateInventory() {
     clearBoard(['inventory']);
     createElementDiv('inventoryDiv', 'inventory');
     for (let key of chase.inventory) {
-        if(key.type === 1) {
+        if(key.type !== 0) {
             createElementButton('inventory', key.name, key.name, 'btn-secondary');
             document.getElementById(key.name).addEventListener('click', () => {
                 equip(key);
             })
-        } else if (key.type === 0) {
+        } else {
             createElementButton('inventory', key.name, key.name, 'btn-secondary');
             document.getElementById(key.name).setAttribute('disabled', '');
         }
@@ -90,12 +95,22 @@ function equip(item) {
     if(item.type === 1) {
         chase.equipment.Weapon = item;
     }
+    if(item.type === 2) {
+        chase.equipment.Helm = item;
+    }
+    if(item.type === 3) {
+        chase.equipment.Chest = item;
+    }
+    if(item.type === 4) {
+        chase.equipment.Boots = item;
+    }
     const index = inventoryArray.findIndex(element => {
         return element.name === item.name
     })
     inventoryArray.splice(index, 1);
     updateEquipment();
     updateInventory();
+    updateStatus();
 }
 
 
