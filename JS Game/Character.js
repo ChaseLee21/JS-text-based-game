@@ -61,15 +61,36 @@ function updateStatus() {
 }
 
 /*
-Updates the DOM to show accurate player inventory
+updateInventory() exists to update the DOM to show accurate player inventory
+creates buttons for each item in the inventory to be able to equip items
 */
 function updateInventory() {
     clearBoard(['inventory']);
     createElementDiv('inventoryDiv', 'inventory');
     for (let key of chase.inventory) {
-        createElementText('inventory', '', 'div', key.name);
+        if(key.type === 1) {
+            createElementButton('inventory', key.name, key.name, 'btn-secondary');
+            document.getElementById(key.name).addEventListener('click', () => {
+                equip(key);
+            })
+        } else if (key.type === 0) {
+            createElementButton('inventory', key.name, key.name, 'btn-secondary');
+            document.getElementById(key.name).setAttribute('disabled', '');
+        }
     }
 }
+
+
+/* 
+equip() exists to edit the players current equipment and current inventory
+calls updateEquipment() and updateInventory() to update the DOM
+*/
+
+function equip(item) {
+    console.log(item);
+    let slot = item.type;
+}
+
 
 /*
 Updates the DOM to show accurate player equipment
