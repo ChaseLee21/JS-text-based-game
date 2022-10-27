@@ -22,7 +22,13 @@ loot(enemy) exists to add an item to the players inventory if it drops
 function loot(enemy) {
     const result = roll(enemy.loot.lootChance); 
     //console.log(result)
-    if (result) chase.inventory.push(enemy.loot)
+    if (result) {
+        chase.inventory.push(enemy.loot)
+        log('Chase looted ' + enemy.loot.name + ' from ' + enemy.name);
+    }
+    
+    
+    
     updateInventory();
 }
 

@@ -73,7 +73,7 @@ Initialize variables and start()
 */
 
 
-let chase = new Character(100); 
+let player = new Character(100); 
 let gameBoard = document.getElementById('gameBoard'); 
 start();
 
@@ -88,6 +88,30 @@ function start() {
     updateGameBoard(roomArray[0]);
     initializeStatus();
 }
+
+
+/* 
+TODO create a function that asks for an input from the player
+that input will be the players name
+*/
+function getName() {
+    
+}
+
+
+
+/* 
+TODO add a method that logs what is going on and display it on the DOM
+ex. Chase attacked skeever for (damage)
+    Skeever attacked Chase for (damage)
+    Chase looted (item) off of Skeleton
+*/
+
+function log(text) {
+    createElementText('log', '', 'p', text);
+}
+
+
 
 /* 
 createElement() functions are used to more easily create new elements on the DOM

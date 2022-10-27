@@ -6,7 +6,7 @@ should only be used once when initializing the game
 
 class Character {
     constructor(health) {
-        this.name = 'chase';
+        this.name = 'placeholder';
         this.health = health;
         this.inventory = inventoryArray;
         this.equipment = {
@@ -32,9 +32,9 @@ updates the players health afterwards
 */
 function enemyAttack(id) {
     let enemy = combatArray.find(element => element.id === id);
-    let damage = (enemy.damage - chase.armor);
-    //console.log(enemy.damage, chase.armor, damage);
-    if (damage > 0) chase.health -= damage;
+    let damage = (enemy.damage - player.armor);
+    //console.log(enemy.damage, player.armor, damage);
+    if (damage > 0) player.health -= damage;
     updateStatus();
 }
 
@@ -45,11 +45,11 @@ TODO make two seperate functions, 1 that initializes the player DOM and another 
 function initializeStatus() {
     clearBoard(['status']);
     createElementDiv('statusDIV', 'status', 'card-text');
-    createElementText('status', 'playerHealth', 'div', 'Health: ' + chase.health, 'fs-2');
+    createElementText('status', 'playerHealth', 'div', 'Health: ' + player.health, 'fs-2');
     createElementText('status', 'playerArmor', 'div', 
-    'Armor: ' + (chase.equipment.Boots.armor + chase.equipment.Chest.armor + chase.equipment.Helm.armor), 
+    'Armor: ' + (player.equipment.Boots.armor + player.equipment.Chest.armor + player.equipment.Helm.armor), 
     'fs-2');
-    createElementText('status', 'playerDamage', 'div', 'Damage: ' + chase.equipment.Weapon.damage, 'fs-2');
+    createElementText('status', 'playerDamage', 'div', 'Damage: ' + player.equipment.Weapon.damage, 'fs-2');
 }
 
 /* 
@@ -57,14 +57,14 @@ updateStatus() is used to update the DOM with accurate player stats
 ex. Health & Armor
 */
 function updateStatus() {
-    chase.armor = (
-        chase.equipment.Helm.armor +
-        chase.equipment.Chest.armor +
-        chase.equipment.Boots.armor
+    player.armor = (
+        player.equipment.Helm.armor +
+        player.equipment.Chest.armor +
+        player.equipment.Boots.armor
     );
-    document.getElementById('playerHealth').innerHTML = 'Health: ' + chase.health;
-    document.getElementById('playerArmor').innerHTML = 'Armor: ' + chase.armor;
-    document.getElementById('playerDamage').innerHTML = 'Damage: ' + chase.equipment.Weapon.damage;
+    document.getElementById('playerHealth').innerHTML = 'Health: ' + player.health;
+    document.getElementById('playerArmor').innerHTML = 'Armor: ' + player.armor;
+    document.getElementById('playerDamage').innerHTML = 'Damage: ' + player.equipment.Weapon.damage;
 
 }
 
@@ -75,7 +75,7 @@ creates buttons for each item in the inventory to be able to equip items
 function updateInventory() {
     clearBoard(['inventory']);
     createElementDiv('inventoryDiv', 'inventory');
-    for (let key of chase.inventory) {
+    for (let key of player.inventory) {
         if(key.type !== 0) {
             createElementButton('inventory', key.name, key.name, 'btn-secondary');
             document.getElementById(key.name).addEventListener('click', () => {
@@ -95,22 +95,28 @@ calls updateEquipment() and updateInventory() to update the DOM
 */
 
 function equip(item) {
+    let oldItem;
     if(item.type === 1) {
-        chase.equipment.Weapon = item;
+        oldItem = player.equipment.Weapon;
+        player.equipment.Weapon = item;
     }
     if(item.type === 2) {
-        chase.equipment.Helm = item;
+        oldItem = player.equipment.Helm;
+        player.equipment.Helm = item;
     }
     if(item.type === 3) {
-        chase.equipment.Chest = item;
+        oldItem = player.equipment.Chest;
+        player.equipment.Chest = item;
     }
     if(item.type === 4) {
-        chase.equipment.Boots = item;
+        oldItem = player.equipment.Boots;
+        player.equipment.Boots = item;
     }
     const index = inventoryArray.findIndex(element => {
         return element.name === item.name
     })
     inventoryArray.splice(index, 1);
+    log('player equipped ' + item.name + ' destroying ' + oldItem.name + ' in the process');
     updateEquipment();
     updateInventory();
     updateStatus();
@@ -123,7 +129,7 @@ Updates the DOM to show accurate player equipment
 function updateEquipment() {
     clearBoard(['character']);
     createElementDiv('characterDiv', 'character');
-    for (let key in chase.equipment) {
-        createElementText('character', '', 'div', key + ': ' + chase.equipment[key].name);
+    for (let key in player.equipment) {
+        createElementText('character', '', 'div', key + ': ' + player.equipment[key].name);
      } 
 }
