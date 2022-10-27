@@ -16,7 +16,12 @@ class Item {
 }
 
 function loot(enemy) {
-    console.log(enemy.loot, enemy.loot.lootChance);
-    chase.inventory.push(enemy.loot);
+    const result = roll(enemy.loot.lootChance); 
+    if (result) chase.inventory.push(enemy.loot)
     updateInventory();
+}
+
+function roll(chance) {
+    const diceRoll = Math.random();
+    return (diceRoll < chance) ? true : false;
 }

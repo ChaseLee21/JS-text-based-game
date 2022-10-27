@@ -16,7 +16,7 @@ let itemsArray = [
     new Equipment('Cloth Robe', 2, 2),
     new Item('Torch', 0, 0),
     new Item('Copper Shortsword', 1, 2),
-    new Item('Skeevers Tooth', 1, 4)
+    new Item('Skeevers Tooth', 1, 4, .5)
 ]; //this array stores all items that can be placed in inventoryArray[] later in the game
 
 let inventoryArray = [
