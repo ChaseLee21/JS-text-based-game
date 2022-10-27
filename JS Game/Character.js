@@ -44,6 +44,7 @@ TODO make two seperate functions, 1 that initializes the player DOM and another 
 */
 function initializeStatus() {
     clearBoard(['status']);
+    document.getElementById('playerName').innerHTML = player.name;
     createElementDiv('statusDIV', 'status', 'card-text');
     createElementText('status', 'playerHealth', 'div', 'Health: ' + player.health, 'fs-2');
     createElementText('status', 'playerArmor', 'div', 

@@ -14,7 +14,7 @@
 <body>
 <div class="container-fluid bg-dark text-light">
     <div class="row">
-        <h1 class="text-center" id="roomName">Room Name</h1>
+        <h1 class="text-center" id="roomName">Welcome</h1>
     </div>
 
     <div class="row text-center">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="row">
-                <h1>Character</h1>
+                <h1>Equipment</h1>
                 <div id="characterDiv">
                     <div id="character">
 
@@ -38,7 +38,7 @@
         </div>
         <div class="col-6">
             <div class="row">
-                <p id="gameBoard">Game Board Text</p>
+                <p id="gameBoard">Click 'Start Game' to play</p>
             </div>
             <div class="row text-center d-flex justify-content-center">
                 <h1>Enemies</h1>
@@ -80,9 +80,43 @@
         </div>
     </div>
     <br>
+
+
+<!-- 
+    button that starts the game and lets the player name their character
+ -->
+ <div class="d-flex justify-content-center text-dark">
+     <button id='startButton' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+         Start Game
+       </button>
+       
+       <!-- Modal -->
+       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h1 class="modal-title fs-5" id="exampleModalLabel">Please name your character</h1>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+               <input type="text" id="nameInput">
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-primary" onclick="start()" data-bs-dismiss="modal">Start</button>
+             </div>
+           </div>
+         </div>
+       </div>
+ </div>
 </div>
+  
 
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 <script src="Action.js"></script>
 <script src="Character.js"></script>
 <script src="Enemy.js"></script>
@@ -90,7 +124,5 @@
 <script src="Item.js"></script>
 <script src="Room.js"></script>
 <script src="index.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 </body>
 </html>

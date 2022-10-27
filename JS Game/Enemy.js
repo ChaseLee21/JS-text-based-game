@@ -26,7 +26,7 @@ after damage calculation checks to see if enemy is dead and updates enemy.alive 
 */
 function attackEnemy(id) {
     let enemy = combatArray.find(element => element.id === id);
-    let damage = chase.equipment.Weapon.damage;
+    let damage = player.equipment.Weapon.damage;
     enemy.health -= (damage - enemy.armor);
     if (enemy.health <= 0) {
         enemy.alive = false;

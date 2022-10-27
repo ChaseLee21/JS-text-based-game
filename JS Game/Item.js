@@ -23,8 +23,8 @@ function loot(enemy) {
     const result = roll(enemy.loot.lootChance); 
     //console.log(result)
     if (result) {
-        chase.inventory.push(enemy.loot)
-        log('Chase looted ' + enemy.loot.name + ' from ' + enemy.name);
+        player.inventory.push(enemy.loot)
+        log('player looted ' + enemy.loot.name + ' from ' + enemy.name);
     }
     
     
