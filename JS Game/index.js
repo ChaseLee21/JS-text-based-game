@@ -16,7 +16,8 @@ let itemsArray = [
     new Equipment('Cloth Robe', 2, 2),
     new Item('Torch', 0, 0),
     new Item('Copper Shortsword', 1, 2),
-    new Item('Skeevers Tooth', 1, 4, .5)
+    new Item('Skeevers Tooth', 1, 4, .5),
+    new Equipment('Cracked Mining Helmet', 1, 2, .9)
 ]; //this array stores all items that can be placed in inventoryArray[] later in the game
 
 let inventoryArray = [
@@ -29,7 +30,8 @@ let combatArray = [
 
 let enemiesArray = [
     new Enemy('Unknown Body', 0, 0, 0, itemsArray[0], false),
-    new Enemy('Skeever', 8, 0, 6, itemsArray[5])
+    new Enemy('Skeever', 8, 0, 6, itemsArray[5]),
+    new Enemy('Skeleton', 16, 0, 10, itemsArray[6])
 ]; //this array stores enemys to be called in the updateGameBoard()
 
 let roomArray = [
@@ -40,11 +42,17 @@ let roomArray = [
     [enemiesArray[0]],
     [new Action('Follow Passage', () => { updateGameBoard(roomArray[1]) } )]
     ),
-    new Room(`Skeever attack`, 
+    new Room(`Skeever Den`, 
     `You follow the passage lit by the torch you crafted. A horid stench becomes more profound as you continue down the path.
     As the passage opens up into a wider room you see skeevers scatter as the light from your torch hits their body's. 
     A dead body reveals itself and one brave soldier from the pack stays behind looking for a fight.`,
     [enemiesArray[1], enemiesArray[1]],
+    [new Action('Continue Path', () => { updateGameBoard(roomArray[2]) })]
+    ),
+    new Room(`Miner's Grave`,
+    `Whats left of corpse starts to move as you get closer. The walls start to shake and wispering voices pass by you as the
+    skeleton takes it shape. Evil is here. It faces you.`,
+    [enemiesArray[2]],
     []
     )
 ]; //this array stores the different room encounters and is called from the action buttons
