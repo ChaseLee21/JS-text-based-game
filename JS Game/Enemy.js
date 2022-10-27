@@ -5,11 +5,12 @@ do not call this class in combatArray[] because it is designed
 to be cloned into the combatArray[] from the enemiesArray[]
 */
 class Enemy {
-    constructor(name, health, armor, damage, alive) {
+    constructor(name, health, armor, damage, loot, alive) {
         this.name = name;
         this.health = health;
         this.armor = armor;
         this.damage = damage;
+        this.loot = loot;
         if (alive) {
             this.alive = alive;
         }
@@ -29,6 +30,7 @@ function attackEnemy(id) {
     enemy.health -= (damage - enemy.armor);
     if (enemy.health <= 0) {
         enemy.alive = false;
+        loot(enemy);
     }
     updateEnemies(id, enemy);
 }
@@ -71,13 +73,13 @@ function createEnemies() {
         let name = enemy.name.replace(' ', '') + enemy.id;
 
         if(enemy.health === 0) {
-            createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
+            createElementDiv('enemiesDIV', 'enemy' + name, 'card m-2 text-dark d-flex justify-content-center', 'width: 12rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
             createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
             createElementDiv('cardBody' + name, 'enemies' + name, 'card-body');
             createElementText('enemies' + name, '', 'div', 'Dead', 'fs-4');
         } else {
-            createElementDiv('enemiesDIV', 'enemy' + name, 'card text-dark d-flex justify-content-center', 'width: 12rem');
+            createElementDiv('enemiesDIV', 'enemy' + name, 'card m-2 text-dark d-flex justify-content-center', 'width: 12rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
             createElementDiv('cardTitle' + name, 'cardBody' + name);
             createElementDiv('cardBody' + name, 'enemies' + name, 'card-body');

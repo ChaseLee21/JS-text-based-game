@@ -33,7 +33,7 @@ updates the players health afterwards
 function enemyAttack(id) {
     let enemy = combatArray.find(element => element.id === id);
     let damage = (enemy.damage - chase.armor);
-    console.log(enemy.damage, chase.armor, damage);
+    //console.log(enemy.damage, chase.armor, damage);
     if (damage > 0) chase.health -= damage;
     updateStatus();
 }
@@ -64,6 +64,8 @@ function updateStatus() {
 Updates the DOM to show accurate player inventory
 */
 function updateInventory() {
+    clearBoard(['inventory']);
+    createElementDiv('inventoryDiv', 'inventory');
     for (let key of chase.inventory) {
         createElementText('inventory', '', 'div', key.name);
     }

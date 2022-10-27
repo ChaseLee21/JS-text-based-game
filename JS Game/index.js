@@ -15,7 +15,8 @@ let itemsArray = [
     new Equipment('Torn Leather Boots', 3, 2),
     new Equipment('Cloth Robe', 2, 2),
     new Item('Torch', 0, 0),
-    new Item('Copper Shortsword', 1, 2)
+    new Item('Copper Shortsword', 1, 2),
+    new Item('Skeevers Tooth', 1, 4)
 ]; //this array stores all items that can be placed in inventoryArray[] later in the game
 
 let inventoryArray = [
@@ -27,8 +28,8 @@ let combatArray = [
 ]; //this array stores the current enemys from enemiesArray[] on the battlefield both dead and alive
 
 let enemiesArray = [
-    new Enemy('Unknown Body', 0, 0, 0, false),
-    new Enemy('Skeever', 8, 0, 6)
+    new Enemy('Unknown Body', 0, 0, 0, itemsArray[0], false),
+    new Enemy('Skeever', 8, 0, 6, itemsArray[5])
 ]; //this array stores enemys to be called in the updateGameBoard()
 
 let roomArray = [
