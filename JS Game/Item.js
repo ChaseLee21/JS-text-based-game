@@ -24,7 +24,7 @@ function loot(enemy) {
     //console.log(result)
     if (result) {
         player.inventory.push(enemy.loot)
-        log('player looted ' + enemy.loot.name + ' from ' + enemy.name);
+        log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
     }
     
     

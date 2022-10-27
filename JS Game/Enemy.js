@@ -30,7 +30,10 @@ function attackEnemy(id) {
     enemy.health -= (damage - enemy.armor);
     if (enemy.health <= 0) {
         enemy.alive = false;
+        log(player.name + ' killed ' + enemy.name);
         loot(enemy);
+    } else {
+        log(player.name + ' hit ' + enemy.name + ' for ' + (damage - enemy.armor) + ' health')
     }
     updateEnemies(id, enemy);
 }

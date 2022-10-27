@@ -1,15 +1,10 @@
 //TODO
-//add a combat system that rewards loot
-//let the player name their own character
-
 
 /* 
 Start of array declarations
 These arrays store objects to be referenced to during the game
 Any item, room, or enemy is created in these arrays
 */
-
-
 
 /* 
 this array stores all items that can be placed in inventoryArray[] later in the game
@@ -21,7 +16,7 @@ chest = 3
 boots = 4
 */
 let itemsArray = [
-    new Equipment('None', 0, 0), //0
+    new Equipment('nothing', 0, 0), //0
     new Equipment('Torn Leather Boots', 4, 2), //1
     new Equipment('Cloth Robe', 3, 2), //2
     new Item('Torch', 0, 0), //3
@@ -92,17 +87,6 @@ function start() {
 }
 
 /* 
-TODO add a method that logs what is going on and display it on the DOM
-ex. Chase attacked skeever for (damage)
-    Skeever attacked Chase for (damage)
-    Chase looted (item) off of Skeleton
-*/
-
-function log(text) {
-    createElementText('log', '', 'p', text);
-}
-
-/* 
 createElement() functions are used to more easily create new elements on the DOM
 they are seperated from each other for easier understanding
 the only mandatory param is appendingElement as the new element has to append to an existing one 
@@ -114,7 +98,7 @@ function createElementDiv(appendingElement, id, classes, style) {
     if (id) createElement.setAttribute('id', id);
     if (classes) createElement.setAttribute('class', classes);
     if (style) createElement.setAttribute('style', style);
-
+    
 }
 
 function createElementButton(appendingElement, id, text, classes) {
@@ -136,6 +120,19 @@ function createElementText(appendingElement, id, type, text, classes) {
     if (id) createElement.setAttribute('id', id);
     if (classes) createElement.setAttribute('class', classes);
 }
+
+/* 
+log is used to add text below the game board that logs the actions going on in the game
+*/
+
+function log(text) {
+    const createElement = document.createElement('p');
+    const createText = document.createTextNode(text);
+    const appendElement = document.getElementById('log');
+    createElement.appendChild(createText);
+    appendElement.prepend(createElement);
+}
+
 
 /* 
 requires an arry as the param

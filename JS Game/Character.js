@@ -117,7 +117,7 @@ function equip(item) {
         return element.name === item.name
     })
     inventoryArray.splice(index, 1);
-    log('player equipped ' + item.name + ' destroying ' + oldItem.name + ' in the process');
+    log(player.name + ' equipped ' + item.name + ' destroying ' + oldItem.name + ' in the process');
     updateEquipment();
     updateInventory();
     updateStatus();
