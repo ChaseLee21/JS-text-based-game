@@ -14,6 +14,7 @@ weapon = 1
 helm = 2
 chest = 3
 boots = 4
+potion = 5
 */
 let itemsArray = [
     new Equipment('nothing', 0, 0), //0
@@ -22,7 +23,8 @@ let itemsArray = [
     new Item('Torch', 0, 0), //3
     new Item('Copper Shortsword', 1, 2), //4
     new Item('Skeevers Tooth', 1, 4, .5), //5
-    new Equipment('Cracked Mining Helmet', 2, 2, .9) //6
+    new Equipment('Cracked Mining Helmet', 2, 2, .9), //6
+    new Item('Bat Blood', 5, 0, .5) //7
 ]; 
 
 let inventoryArray = [
@@ -30,34 +32,51 @@ let inventoryArray = [
 ]; //this array stores items in the players in current inventory
 
 let combatArray = [
-
+    
 ]; //this array stores the current enemys from enemiesArray[] on the battlefield both dead and alive
 
 let enemiesArray = [
-    new Enemy('Unknown Body', 0, 0, 0, itemsArray[0], false),
-    new Enemy('Skeever', 8, 0, 6, itemsArray[5]),
-    new Enemy('Skeleton', 16, 0, 10, itemsArray[6])
+    new Enemy('None', 0, 0, 0, itemsArray[0], false), //0
+    new Enemy('Unknown Body', 0, 0, 0, itemsArray[0], false), //1
+    new Enemy('Skeever', 8, 0, 6, itemsArray[5]), //2
+    new Enemy('Skeleton', 16, 0, 10, itemsArray[6]), //3
+    new Enemy('Bat', 6, 0, 3, itemsArray[7]) //4
 ]; //this array stores enemys to be called in the updateGameBoard()
 
+let player = new Character(100); 
 let roomArray = [
     new Room(`Welcome to Chase's Game`,
     `You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
     She doesn't appear to be someone you know but you don't remember much. You loot a Cooper Shortsword from her body and lit
     a torch from the fire. In this room there is a narrow passage with no light coming from it.`,
-    [enemiesArray[0]],
+    [enemiesArray[1]],
     [new Action('Follow Passage', () => { updateGameBoard(roomArray[1]) } )]
     ),
     new Room(`Skeever Den`, 
     `You follow the passage lit by the torch you crafted. A horid stench becomes more profound as you continue down the path.
     As the passage opens up into a wider room you see skeevers scatter as the light from your torch hits their body's. 
-    A dead body reveals itself and one brave soldier from the pack stays behind looking for a fight.`,
-    [enemiesArray[1], enemiesArray[1]],
+    A dead body reveals itself and two brave skeevers from the pack stays behind looking for a fight.`,
+    [enemiesArray[2], enemiesArray[2]],
     [new Action('Continue Path', () => { updateGameBoard(roomArray[2]) })]
     ),
     new Room(`Miner's Grave`,
     `Whats left of corpse starts to move as you get closer. The walls start to shake and wispering voices pass by you as the
     skeleton takes it shape. Evil is here. It faces you.`,
-    [enemiesArray[2]],
+    [enemiesArray[3]],
+    [new Action('Continue Path', () => { updateGameBoard(roomArray[3]) })]
+    ),
+    new Room(`The Evil Presence`,
+    `The skeleton's bones crumbled before your very eyes. The wispers die off. The cave wall crumbled from the death 
+    of the skeleton exposing a ladder leading down. You feel an evil presence is here. Something is not right. Proceed with caution.
+    `,
+    [],
+    [new Action('Continue Path', () => { updateGameBoard(roomArray[4]) })]
+    ),
+    new Room(``,
+    `The room is cold. You can see your breath and the movements of your body echo. You kick a pebble which
+    you find is a mistake very quickly as the sound of bat wings echo in seemingly empty cave. Your torch emits just enought light
+    to see them fly around one by one. You draw your ` + player.equipment.Weapon + `and ready yourself as they swarm.`,
+    [enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4]],
     []
     )
 ]; //this array stores the different room encounters and is called from the action buttons
@@ -68,7 +87,6 @@ Initialize variables and start()
 */
 
 
-let player = new Character(100); 
 let gameBoard = document.getElementById('gameBoard'); 
 //start();
 
