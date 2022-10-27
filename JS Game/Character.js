@@ -49,6 +49,7 @@ function initializeStatus() {
     createElementText('status', 'playerArmor', 'div', 
     'Armor: ' + (chase.equipment.Boots.armor + chase.equipment.Chest.armor + chase.equipment.Helm.armor), 
     'fs-2');
+    createElementText('status', 'playerDamage', 'div', 'Damage: ' + chase.equipment.Weapon.damage, 'fs-2');
 }
 
 /* 
@@ -63,6 +64,8 @@ function updateStatus() {
     );
     document.getElementById('playerHealth').innerHTML = 'Health: ' + chase.health;
     document.getElementById('playerArmor').innerHTML = 'Armor: ' + chase.armor;
+    document.getElementById('playerDamage').innerHTML = 'Damage: ' + chase.equipment.Weapon.damage;
+
 }
 
 /*
