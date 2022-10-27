@@ -87,8 +87,15 @@ calls updateEquipment() and updateInventory() to update the DOM
 */
 
 function equip(item) {
-    console.log(item);
-    let slot = item.type;
+    if(item.type === 1) {
+        chase.equipment.Weapon = item;
+    }
+    const index = inventoryArray.findIndex(element => {
+        return element.name === item.name
+    })
+    inventoryArray.splice(index, 1);
+    updateEquipment();
+    updateInventory();
 }
 
 
@@ -96,6 +103,8 @@ function equip(item) {
 Updates the DOM to show accurate player equipment
 */
 function updateEquipment() {
+    clearBoard(['character']);
+    createElementDiv('characterDiv', 'character');
     for (let key in chase.equipment) {
         createElementText('character', '', 'div', key + ': ' + chase.equipment[key].name);
      } 
