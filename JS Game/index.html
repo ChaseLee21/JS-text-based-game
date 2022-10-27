@@ -12,52 +12,55 @@
 <title>Chases Game</title>
 </head>
 <body>
+    <!-- body container  -->
 <div class="container-fluid bg-dark text-light">
+    <!-- room name container -->
     <div class="row">
         <h1 class="text-center" id="roomName">Welcome</h1>
     </div>
-
+    <!-- game text container -->
+    <div class="row">
+        <p id="gameBoard" class="text-center">Click 'Start Game' to play</p>
+    </div>
+    <!-- enemy container -->
     <div class="row text-center">
-        <div class="col-3">
-            <div class="row">
-                <h1>Inventory</h1>
-                <div id="inventoryDiv">
-                    <div id="inventory">
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <h1>Equipment</h1>
-                <div id="characterDiv">
-                    <div id="character">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <p id="gameBoard">Click 'Start Game' to play</p>
-            </div>
+        <div class="container text-center" id="enemiesBoard">
             <h1>Enemies</h1>
-            <div class="container text-center" id="enemiesBoard">
-                <div class='row row-cols-3' id="enemiesDIV">
-
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <h1>Actions</h1>
-            <div id="actionsDiv">
-                <ul id="actions">
-
-                </ul>
+            <div class='row row-cols-3' id="enemiesDIV">
 
             </div>
         </div>
     </div>
+    <!-- actions container -->
+    <div class='row text-center'>
+        <h1>Actions</h1>
+        <div id="actionsDiv">
+            <div id="actions">
+
+            </div>
+        </div>
+    </div>
+
     <br>
+    <!-- Inventory container -->
+    <div class="row text-center">
+        <h1>Inventory</h1>
+        <div id="inventoryDiv">
+            <div id="inventory">
+
+            </div>
+        </div>
+    </div>
+    <!-- Equipment container -->
+    <div class="row text-center">
+        <h1>Equipment</h1>
+        <div id="characterDiv">
+            <div id="character">
+
+            </div>
+        </div>
+    </div>
+    <!-- player status container -->
     <div class="row text-center d-flex justify-content-center">
         <div class="card text-dark" style="width: 600px;">
             <div class="card-body" id="statusDIV">
@@ -68,7 +71,9 @@
             </div>
         </div>
     </div>
+
     <br>
+    <!-- log container -->
     <div class="row text-center d-flex justify-content-center">
         <div id="logDiv">
             <div id="log">
@@ -77,35 +82,35 @@
 
         </div>
     </div>
+
     <br>
 
+    <!-- modal container -->
+    <div class="d-flex justify-content-center text-dark">
 
-<!-- 
-    button that starts the game and lets the player name their character
- -->
- <div class="d-flex justify-content-center text-dark">
-     <button id='startButton' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-         Start Game
-       </button>
-       
-       <!-- Modal -->
-       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-           <div class="modal-content">
-             <div class="modal-header">
-               <h1 class="modal-title fs-5" id="exampleModalLabel">Please name your character</h1>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-             <div class="modal-body">
-               <input type="text" id="nameInput">
-             </div>
-             <div class="modal-footer">
-               <button type="button" class="btn btn-primary" onclick="start()" data-bs-dismiss="modal">Start</button>
-             </div>
-           </div>
-         </div>
-       </div>
- </div>
+        <!-- button that starts the game and lets the player name their character -->
+        <button id='startButton' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Start Game
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Please name your character</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="nameInput">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="start()" data-bs-dismiss="modal">Start</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
   
 

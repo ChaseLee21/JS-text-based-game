@@ -67,7 +67,7 @@ updating enemy health after the card is created attackEnemy() is used instead
 */
 function createEnemies() {
     clearBoard(['enemiesDIV']);
-    createElementDiv('enemiesBoard', 'enemiesDIV', 'row row-cols-3');
+    createElementDiv('enemiesBoard', 'enemiesDIV', 'row row-cols-3 d-flex justify-content-center');
 
     for (let i = 0; i < combatArray.length; i++) {
 
@@ -76,15 +76,18 @@ function createEnemies() {
         let name = enemy.name.replace(' ', '') + enemy.id;
 
         if(enemy.health === 0) {
-            createElementDiv('enemiesDIV', 'col' + name, 'col');
-            createElementDiv('col' + name, 'enemy' + name, 'card m-4 text-dark d-flex justify-content-center', 'width: 12rem');
+
+            createElementDiv('enemiesDIV', 'col' + name, 'col d-flex justify-content-center');
+            createElementDiv('col' + name, 'enemy' + name, 'card m-2 text-dark', 'max-width: 18rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
             createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
             createElementDiv('cardBody' + name, 'enemies' + name, 'card-body');
             createElementText('enemies' + name, '', 'div', 'Dead', 'fs-4');
+
         } else {
-            createElementDiv('enemiesDIV', 'col' + name, 'col');
-            createElementDiv('col' + name, 'enemy' + name, 'card m-4 text-dark d-flex justify-content-center', 'width: 12rem');
+
+            createElementDiv('enemiesDIV', 'col' + name, 'col d-flex justify-content-center');
+            createElementDiv('col' + name, 'enemy' + name, 'card m-4 text-dark d-flex justify-content-center', 'width: 18rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
             createElementDiv('cardTitle' + name, 'cardBody' + name);
             createElementDiv('cardBody' + name, 'enemies' + name, 'card-body');
@@ -92,6 +95,7 @@ function createEnemies() {
             createElementText('enemies' + name, name + 'Armor', 'div', 'Armor: ' + enemy.armor, 'fs-4');
             createElementButton('enemies' + name, name + 'Attack', 'Attack', 'btn-primary')
             document.getElementById(name + 'Attack').addEventListener('click', () => { attackEnemy(enemy.id) });
+
         }
     }
 }
