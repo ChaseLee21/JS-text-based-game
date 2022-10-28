@@ -43,7 +43,6 @@ let enemiesArray = [
     new Enemy('Bat', 6, 0, 3, itemsArray[7]) //4
 ]; //this array stores enemys to be called in the updateGameBoard()
 
-let player = new Character(100); 
 let roomArray = [
     new Room(`Welcome to Chase's Game`,
     `You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
@@ -75,7 +74,7 @@ let roomArray = [
     new Room(``,
     `The room is cold. You can see your breath and the movements of your body echo. You kick a pebble which
     you find is a mistake very quickly as the sound of bat wings echo in seemingly empty cave. Your torch emits just enought light
-    to see them fly around one by one. You draw your ` + player.equipment.Weapon + `and ready yourself as they swarm.`,
+    to see them fly around one by one. You draw your weapon and ready yourself as they swarm.`,
     [enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4]],
     []
     )
@@ -83,12 +82,12 @@ let roomArray = [
 
 
 /* 
-Initialize variables and start()
+Initialize variables
 */
 
 
 let gameBoard = document.getElementById('gameBoard'); 
-//start();
+let player = new Character(100); 
 
 /* 
 Global function declarations

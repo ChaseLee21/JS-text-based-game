@@ -41,18 +41,7 @@ function updateGameBoard(room) {
     updateRoomName(room.name);
 }
 
-/* 
-called only in updateGameBoard()
-clears current actions and updates the DOM to show the new ones
-*/
-function updateActions(actions){
-    clearBoard(['actions']); //clears current actions on the game board
-    createElementDiv('actionsDiv', 'actions');
-    for (let action of actions) { 
-        createElementButton('actions', 'action' + action.text.replace(' ', ''), action.text, 'btn-primary');
-        document.getElementById('action' + action.text.replace(' ', '')).addEventListener('click', action.action);
-    }
-}
+
 
 /* 
 called only in updateGameBoard()

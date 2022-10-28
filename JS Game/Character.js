@@ -33,8 +33,10 @@ updates the players health afterwards
 function enemyAttack(id) {
     let enemy = combatArray.find(element => element.id === id);
     let damage = (enemy.damage - player.armor);
-    //console.log(enemy.damage, player.armor, damage);
-    if (damage > 0) player.health -= damage;
+    if (damage > 0) {
+        log(enemy.name + ' hit ' + player.name + ' for ' + damage + ' health')
+        player.health -= damage;
+    }
     updateStatus();
 }
 

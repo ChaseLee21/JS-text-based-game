@@ -53,9 +53,9 @@ async function updateEnemies(id, enemy) {
     } else {
         health.innerHTML = 'Health: ' + enemy.health;
         armor.innerHTML = 'Armor: ' + enemy.armor;
+        enemyAttack(id);
     }
     //await new Promise(resolve => setTimeout(resolve, 1000)); //commented out because it can be abused
-    enemyAttack(id);
 }
 
 /* 
