@@ -39,6 +39,21 @@ function attackEnemy(id) {
 }
 
 /* 
+called after an attack is made on the enemy
+this function will be the enemies 'turn'
+updates the players health afterwards
+*/
+function enemyAttack(id) {
+    let enemy = combatArray.find(element => element.id === id);
+    let damage = (enemy.damage - player.armor);
+    if (damage > 0) {
+        log(enemy.name + ' hit ' + player.name + ' for ' + damage + ' health')
+        player.health -= damage;
+    }
+    updateStatus();
+}
+
+/* 
 gets called from within attackEnemy()
 updates the DOM to show accurate health 
 */

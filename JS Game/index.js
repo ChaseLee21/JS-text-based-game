@@ -28,7 +28,8 @@ let itemsArray = [
 ]; 
 
 let inventoryArray = [
-    itemsArray[3]
+    itemsArray[3],
+    itemsArray[7]
 ]; //this array stores items in the players in current inventory
 
 let combatArray = [

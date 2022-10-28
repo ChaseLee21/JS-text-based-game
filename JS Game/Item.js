@@ -41,3 +41,37 @@ function roll(chance) {
     //console.log(diceRoll, chance);
     return (diceRoll < chance) ? true : false;
 }
+
+
+/* 
+equip() exists to edit the players current equipment and current inventory
+calls updateEquipment() and updateInventory() to update the DOM
+*/
+
+function equip(item) {
+    let oldItem;
+    if(item.type === 1) {
+        oldItem = player.equipment.Weapon;
+        player.equipment.Weapon = item;
+    }
+    if(item.type === 2) {
+        oldItem = player.equipment.Helm;
+        player.equipment.Helm = item;
+    }
+    if(item.type === 3) {
+        oldItem = player.equipment.Chest;
+        player.equipment.Chest = item;
+    }
+    if(item.type === 4) {
+        oldItem = player.equipment.Boots;
+        player.equipment.Boots = item;
+    }
+    const index = inventoryArray.findIndex(element => {
+        return element.name === item.name
+    })
+    inventoryArray.splice(index, 1);
+    log(player.name + ' equipped ' + item.name + ' destroying ' + oldItem.name + ' in the process');
+    updateEquipment();
+    updateInventory();
+    updateStatus();
+}
