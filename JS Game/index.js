@@ -1,4 +1,7 @@
-//TODO
+//TODO 
+//seperate the equipment class to call specific types of equipment
+//items class should only be called for special items
+//potions should call the potions class 
 
 /* 
 Start of array declarations
@@ -10,21 +13,21 @@ Any item, room, or enemy is created in these arrays
 this array stores all items that can be placed in inventoryArray[] later in the game
 equipment = (name, type, armor, lootChance)
 item = (name, type, damage, lootChance)
+potion = (name, type, value, lootChance)
 weapon = 1
 helm = 2
 chest = 3
 boots = 4
-potion = 5
 */
 let itemsArray = [
-    new Equipment('nothing', 0, 0), //0
-    new Equipment('Torn Leather Boots', 4, 2), //1
-    new Equipment('Cloth Robe', 3, 2), //2
-    new Item('Torch', 0, 0), //3
-    new Item('Copper Shortsword', 1, 2), //4
-    new Item('Skeevers Tooth', 1, 4, .5), //5
-    new Equipment('Cracked Mining Helmet', 2, 2, .9), //6
-    new Item('Bat Blood', 5, 0, .5) //7
+    new Equipment('nothing', 'nothing', 0), //0
+    new Equipment('Torn Leather Boots', 'boots', 2), //1
+    new Equipment('Cloth Robe', 'chest', 2), //2
+    new Item('Torch', 'item', 0, 0, true), //3
+    new Item('Copper Shortsword', 'weapon', 2), //4
+    new Item('Skeevers Tooth', 'weapon', 4, .5), //5
+    new Equipment('Cracked Mining Helmet', 'helm', 2, .9), //6
+    new Potion('Bat Blood', 'health', 5, .5) //7
 ]; 
 
 let inventoryArray = [

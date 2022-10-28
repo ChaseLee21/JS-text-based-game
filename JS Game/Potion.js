@@ -2,10 +2,12 @@
 This class makes the potion item that can drop from enemies
 */
 class Potion {
-    constructor(name, type, value) {
+    constructor(name, type, value, lootChance) {
         this.name = name;
-        this.type = type;
+        this.type = 'potion';
         this.value = value;
+        this.lootChance = lootChance
+        this.potionType = type;
     }
 }
 
@@ -14,11 +16,14 @@ potion functions
 */
 
 /* 
-TODO create a function to be assigned to potions when they are used
-should decide what type of potion it is
-based on that decision it uses the potion and removes it from inventory
+usePotion() determines potion type and updates player stats based off type
 */
 
 function usePotion(potion) {
-    console.log(potion);
+    if(potion.potionType === 'health') {
+        player.health += potion.value;    
+        log(player.name + ' drank ' + potion.name + ' gaining ' + potion.potionType + ' health');
+    }
+    removeItem(potion);
+    updateStatus();
 }

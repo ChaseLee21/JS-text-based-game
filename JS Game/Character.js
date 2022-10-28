@@ -63,19 +63,36 @@ function updateInventory() {
     clearBoard(['inventory']);
     createElementDiv('inventoryDiv', 'inventory');
     for (let key of player.inventory) {
-        if(key.type === 1 || key.type === 2 || key.type === 3 || key.type === 4) {
+        if (key.disabled === true) {
+            createElementButton('inventory', key.name, key.name, 'btn-secondary');
+            document.getElementById(key.name).setAttribute('disabled', '');
+        }
+        else if(key.type !== 'nothing' && key.type !== 'potion') {
             createElementButton('inventory', key.name, key.name, 'btn-secondary');
             document.getElementById(key.name).addEventListener('click', () => {
                 equip(key);
             })
-        } else if (key.type === 5) {
+        } else if (key.type === 'potion') {
             createElementButton('inventory', key.name, key.name, 'btn-secondary');
             document.getElementById(key.name).addEventListener('click', () => {
                 usePotion(key);
             })
         } else {
-            createElementButton('inventory', key.name, key.name, 'btn-secondary');
-            document.getElementById(key.name).setAttribute('disabled', '');
+            alert('the item in player inventory has experienced an error');
         }
     }
+}
+
+/* 
+removeItem is used to find the item in the players inventory and delete it from the array
+it then calls updateIventory() to update the DOM
+*/
+
+function removeItem(item) {
+    const index = inventoryArray.findIndex(element => {
+        return element.name === item.name
+    })
+    console.log(item, index);
+    inventoryArray.splice(index, 1);
+    updateInventory();
 }
