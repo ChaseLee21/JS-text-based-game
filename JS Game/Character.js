@@ -77,6 +77,7 @@ function updateInventory() {
             document.getElementById(key.name).addEventListener('click', () => {
                 usePotion(key);
             })
+            
         } else {
             alert('the item in player inventory has experienced an error');
         }
@@ -92,7 +93,6 @@ function removeItem(item) {
     const index = inventoryArray.findIndex(element => {
         return element.name === item.name
     })
-    console.log(item, index);
     inventoryArray.splice(index, 1);
     updateInventory();
 }

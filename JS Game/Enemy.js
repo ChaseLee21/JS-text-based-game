@@ -55,7 +55,7 @@ function enemyAttack(id) {
 
 /* 
 gets called from within attackEnemy()
-updates the DOM to show accurate health 
+exists to update the DOM to show accurate health 
 */
 async function updateEnemies(id, enemy) {
     const health = document.getElementById(enemy.name + id + 'Health');
@@ -114,3 +114,18 @@ function createEnemies() {
         }
     }
 }
+
+/* 
+loot(enemy) exists to add an item to the players inventory if it drops
+*/
+
+function loot(enemy) {
+    const result = roll(enemy.loot.lootChance); 
+    if (result) {
+        player.inventory.push(structuredClone(enemy.loot))
+        log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
+    }
+    updateInventory();
+}
+
+

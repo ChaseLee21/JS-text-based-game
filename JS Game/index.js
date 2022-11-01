@@ -2,6 +2,8 @@
 //seperate the equipment class to call specific types of equipment
 //items class should only be called for special items
 //potions should call the potions class 
+//potions have a bug where only the first one on the list can be used
+//actions only appear after all enemies in the room are dead
 
 /* 
 Start of array declarations
@@ -20,14 +22,14 @@ chest = 3
 boots = 4
 */
 let itemsArray = [
-    new Equipment('nothing', 'nothing', 0), //0
+    new Equipment('nothing', 0), //0
     new Equipment('Torn Leather Boots', 'boots', 2), //1
     new Equipment('Cloth Robe', 'chest', 2), //2
-    new Item('Torch', 'item', 0, 0, true), //3
-    new Item('Copper Shortsword', 'weapon', 2), //4
-    new Item('Skeevers Tooth', 'weapon', 4, .5), //5
+    new Item('Torch', 0, true), //3
+    new Equipment('Copper Shortsword', 'weapon', 2), //4
+    new Equipment('Skeevers Tooth', 'weapon', 4, .5), //5
     new Equipment('Cracked Mining Helmet', 'helm', 2, .9), //6
-    new Potion('Bat Blood', 'health', 5, .5) //7
+    new Equipment('Bat Blood', 'potion', 5, .5) //7
 ]; 
 
 let inventoryArray = [
@@ -165,3 +167,14 @@ function clearBoard(clear) {
         document.getElementById(clear[key]).remove();
     }
 }
+
+/* 
+roll(chance) exists to determine if an item drops or if it doesnt
+*/
+
+function roll(chance) {
+    const diceRoll = Math.random();
+    //console.log(diceRoll, chance);
+    return (diceRoll < chance) ? true : false;
+}
+
