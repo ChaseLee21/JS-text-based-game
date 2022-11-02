@@ -76,6 +76,7 @@ async function updateEnemies(id, enemy) {
         armor.innerHTML = 'Armor: ' + enemy.armor;
         enemyAttack(id);
     }
+    updateActions();
 }
 
 /* 
@@ -126,6 +127,7 @@ function createEnemyCard(enemy) {
 
 /* 
 loot(enemy) exists to add an item to the players inventory if it drops
+determines if that item is already in the players inventory and if it is it adds 1 to the quantity of that item
 */
 
 function loot(enemy) {

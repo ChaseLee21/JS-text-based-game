@@ -33,11 +33,15 @@ it uses these 4 properties to update the DOM
 function updateGameBoard(room) {
     gameBoard.innerHTML = room.text;
     combatArray = [];
+    actionsArray = [];
     for (let enemy of room.enemies) {
         combatArray.push(structuredClone(enemy));
     }
+    for (let action  of room.actions) {
+        actionsArray.push(action);
+    }
     createEnemies();
-    updateActions(room.actions);
+    updateActions();
     updateRoomName(room.name);
 }
 

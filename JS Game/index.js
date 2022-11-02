@@ -8,6 +8,7 @@ These arrays store objects to be referenced to during the game
 Any item, room, or enemy is created in these arrays
 */
 
+
 /* 
 this array stores all items that can be placed in inventoryArray[] later in the game
 equipment = (name, type, armor, lootChance)
@@ -32,15 +33,25 @@ let itemsArray = [
     new Equipment('Plants Demise', 'weapon', 8, 1) //10
 ]; 
 
+
+//this array stores items in the players in current inventory
 let inventoryArray = [
     itemsArray[3],
     itemsArray[7]
-]; //this array stores items in the players in current inventory
+]; 
 
+
+//stores current actions both disabled and active
+let actionsArray = [
+];
+
+
+//this array stores the current enemys from enemiesArray[] on the battlefield both dead and alive
 let combatArray = [
-    
-]; //this array stores the current enemys from enemiesArray[] on the battlefield both dead and alive
+]; 
 
+
+//this array stores enemys to be called in the updateGameBoard()
 let enemiesArray = [
     new Enemy('None', 0, 0, 0, [itemsArray[0]], false), //0
     new Enemy('Unknown Body', 0, 0, 0, [itemsArray[0]], false), //1
@@ -50,8 +61,10 @@ let enemiesArray = [
     new Enemy('Blood Slime', 24, 0, 8, [itemsArray[8], itemsArray[9]]), //5
     new Chest([itemsArray[10]]) //6
 
-]; //this array stores enemys to be called in the updateGameBoard()
+]; 
 
+
+//this array stores the different room encounters and is called from the action buttons
 let roomArray = [
     new Room(`Welcome to Chase's Game`,
     `You woke up in a cave wearing clothes you've never seen before. There is a fire going with a dead body lying next it.
@@ -106,7 +119,7 @@ let roomArray = [
     [],
     []
     )
-]; //this array stores the different room encounters and is called from the action buttons
+]; 
 
 
 /* 

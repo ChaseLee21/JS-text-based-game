@@ -24,17 +24,19 @@ clears current actions and updates the DOM to show the new ones
 function updateActions(actions){
     clearBoard(['actions']); //clears current actions on the game board
     createElementDiv('actionsDiv', 'actions');
-    for (let action of actions) { 
+    const allowed = actionAllowed();
+    for (let action of actionsArray) { 
         createElementButton('actions', 'action' + action.text.replace(' ', ''), action.text, 'btn-primary');
         document.getElementById('action' + action.text.replace(' ', '')).addEventListener('click', action.action);
-        //document.getElementById('action' + action.text.replace(' ', '')).setAttribute('disabled', '');
+        if (!allowed) document.getElementById('action' + action.text.replace(' ', '')).setAttribute('disabled', '');
     }
 }
 
-/* allows actions to be clicked once all enemies die */
+/* checks if all enemies are dead and returns true once they are */
 
 function actionAllowed() {
-    for (let enemy in enemiesArray) {
-
+    for (let enemy of combatArray) {
+        if (enemy.health > 0) return false;
     }
+    return true;
 }
