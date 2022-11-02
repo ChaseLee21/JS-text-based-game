@@ -58,9 +58,11 @@ gets called from within attackEnemy()
 exists to update the DOM to show accurate health 
 */
 async function updateEnemies(id, enemy) {
-    const health = document.getElementById(enemy.name + id + 'Health');
-    const armor = document.getElementById(enemy.name + id + 'Armor');
-    const attackBtn = document.getElementById(enemy.name + id + 'Attack');
+    const name = enemy.name.replace(' ', '') + enemy.id;
+    const health = document.getElementById(name + 'Health');
+    const armor = document.getElementById(name + 'Armor');
+    const attackBtn = document.getElementById(name + 'Attack');
+    console.log(health, armor, attackBtn, id, enemy);
     if(enemy.health <= 0) {
         health.innerHTML = 'Dead';
         armor.innerHTML = '';
@@ -70,7 +72,6 @@ async function updateEnemies(id, enemy) {
         armor.innerHTML = 'Armor: ' + enemy.armor;
         enemyAttack(id);
     }
-    //await new Promise(resolve => setTimeout(resolve, 1000)); //commented out because it can be abused
 }
 
 /* 
@@ -120,17 +121,21 @@ loot(enemy) exists to add an item to the players inventory if it drops
 */
 
 function loot(enemy) {
-    const result = roll(enemy.loot.lootChance); 
-    const existingItem = player.inventory.find((obj) => {
-        return obj.name == enemy.loot.name;
-    })
-    console.log(existingItem, 'exists')
-    if (result && existingItem) {
-        existingItem.quantity += 1
-        log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
-    } else if (result){
-        player.inventory.push(structuredClone(enemy.loot))
-        log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
+    let result, existingItem;
+    for (let loot of enemy.loot){
+        result  = roll(loot.lootChance);
+
+        existingItem = player.inventory.find((obj) => {
+            return obj.name == loot.name;
+        })
+
+        if (result && existingItem) {
+            existingItem.quantity += 1
+            log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
+        } else if (result) {
+            player.inventory.push(structuredClone(loot))
+            log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
+        }
     }
     updateInventory();
 }

@@ -29,7 +29,10 @@ let itemsArray = [
     new Equipment('Copper Shortsword', 'weapon', 2), //4
     new Equipment('Skeevers Tooth', 'weapon', 4, .5), //5
     new Equipment('Cracked Mining Helmet', 'helm', 2, .9), //6
-    new Equipment('Bat Blood', 'potion', 5, .5) //7
+    new Equipment('Bat Blood', 'potion', 5, .5), //7
+    new Equipment('Blood Boots', 'boots', 4, .6), //8
+    new Equipment('Slime Chest', 'chest', 6, .2) //9
+
 ]; 
 
 let inventoryArray = [
@@ -42,11 +45,12 @@ let combatArray = [
 ]; //this array stores the current enemys from enemiesArray[] on the battlefield both dead and alive
 
 let enemiesArray = [
-    new Enemy('None', 0, 0, 0, itemsArray[0], false), //0
-    new Enemy('Unknown Body', 0, 0, 0, itemsArray[0], false), //1
-    new Enemy('Skeever', 8, 0, 6, itemsArray[5]), //2
-    new Enemy('Skeleton', 16, 0, 10, itemsArray[6]), //3
-    new Enemy('Bat', 6, 0, 3, itemsArray[7]) //4
+    new Enemy('None', 0, 0, 0, [itemsArray[0]], false), //0
+    new Enemy('Unknown Body', 0, 0, 0, [itemsArray[0]], false), //1
+    new Enemy('Skeever', 8, 0, 6, [itemsArray[5]]), //2
+    new Enemy('Skeleton', 16, 0, 10, [itemsArray[6]]), //3
+    new Enemy('Bat', 6, 0, 3, [itemsArray[7]]), //4
+    new Enemy('Blood Slime', 24, 0, 8, [itemsArray[8], itemsArray[9]]) //5
 ]; //this array stores enemys to be called in the updateGameBoard()
 
 let roomArray = [
@@ -77,11 +81,18 @@ let roomArray = [
     [],
     [new Action('Continue Path', () => { updateGameBoard(roomArray[4]) })]
     ),
-    new Room(``,
+    new Room(`Slimy Sacrifice`,
     `The room is cold. You can see your breath and the movements of your body echo. You kick a pebble which
-    you find is a mistake very quickly as the sound of bat wings echo in seemingly empty cave. Your torch emits just enought light
+    you find is a mistake very quickly as the sound of bat wings echo in the seemingly empty cave. Your torch emits just enought light
     to see them fly around one by one. You draw your weapon and ready yourself as they swarm.`,
     [enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4], enemiesArray[4]],
+    [new Action('Continue Path', () => { updateGameBoard(roomArray[5]) })]
+    ),
+    new Room(`Tribute`,
+    `Completely covered in bat blood you use your torch to scare off the remaining bats. The echos of bats flying around begin to fade.
+    Not long after silence fills the room the remains of the bats you just murdered are starting to move. One by one they merge into 
+    a creature you've only ever seen in pixel art indie video games. A slime forms before your eyes wielding nothing less than bat wings.`,
+    [enemiesArray[5]],
     []
     )
 ]; //this array stores the different room encounters and is called from the action buttons
