@@ -94,11 +94,16 @@ let roomArray = [
     [enemiesArray[5]],
     [new Action('Continue Path', () => { updateGameBoard(roomArray[6]) })]
     ),
-    new Room(``,
+    new Room(`Alter of Ever Growing Plants`,
     `The Blood Slime seeps into the rock covered floor. Two large rocks begin to shift shacking the cave and exposing a secret pathway.
     You follow this new path now lit up by the naturally glowing plants growing on the walls. You come closer to a dark presence. 
     Not far down the path you enter a room with a chest in the middle. The room is alive with unwordly like plants moving around you.`,
     [enemiesArray[6]],
+    []
+    ),
+    new Room(``,
+    ``,
+    [],
     []
     )
 ]; //this array stores the different room encounters and is called from the action buttons
