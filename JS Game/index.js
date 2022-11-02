@@ -1,9 +1,6 @@
 //TODO 
-//seperate the equipment class to call specific types of equipment
-//items class should only be called for special items
-//potions should call the potions class 
-//potions have a bug where only the first one on the list can be used
 //actions only appear after all enemies in the room are dead
+//create a function that creates a bootstrap card to be used in update enemies
 
 /* 
 Start of array declarations
@@ -31,8 +28,8 @@ let itemsArray = [
     new Equipment('Cracked Mining Helmet', 'helm', 2, .9), //6
     new Equipment('Bat Blood', 'potion', 5, .5), //7
     new Equipment('Blood Boots', 'boots', 4, .6), //8
-    new Equipment('Slime Chest', 'chest', 6, .2) //9
-
+    new Equipment('Slime Chest', 'chest', 6, .2), //9
+    new Equipment('Plants Demise', 'weapon', 8, 1) //10
 ]; 
 
 let inventoryArray = [
@@ -50,7 +47,9 @@ let enemiesArray = [
     new Enemy('Skeever', 8, 0, 6, [itemsArray[5]]), //2
     new Enemy('Skeleton', 16, 0, 10, [itemsArray[6]]), //3
     new Enemy('Bat', 6, 0, 3, [itemsArray[7]]), //4
-    new Enemy('Blood Slime', 24, 0, 8, [itemsArray[8], itemsArray[9]]) //5
+    new Enemy('Blood Slime', 24, 0, 8, [itemsArray[8], itemsArray[9]]), //5
+    new Chest([itemsArray[10]]) //6
+
 ]; //this array stores enemys to be called in the updateGameBoard()
 
 let roomArray = [
@@ -93,6 +92,13 @@ let roomArray = [
     Not long after silence fills the room the remains of the bats you just murdered are starting to move. One by one they merge into 
     a creature you've only ever seen in pixel art indie video games. A slime forms before your eyes wielding nothing less than bat wings.`,
     [enemiesArray[5]],
+    [new Action('Continue Path', () => { updateGameBoard(roomArray[6]) })]
+    ),
+    new Room(``,
+    `The Blood Slime seeps into the rock covered floor. Two large rocks begin to shift shacking the cave and exposing a secret pathway.
+    You follow this new path now lit up by the naturally glowing plants growing on the walls. You come closer to a dark presence. 
+    Not far down the path you enter a room with a chest in the middle. The room is alive with unwordly like plants moving around you.`,
+    [enemiesArray[6]],
     []
     )
 ]; //this array stores the different room encounters and is called from the action buttons

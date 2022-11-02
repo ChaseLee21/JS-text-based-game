@@ -67,6 +67,10 @@ async function updateEnemies(id, enemy) {
         health.innerHTML = 'Dead';
         armor.innerHTML = '';
         attackBtn.remove();
+    } else if (enemy.name === 'Chest') {
+        const chest = document.getElementById(enemy.name + 0 + 'open');
+        chest.setAttribute('disabled', '');
+        chest.innerHTML = 'Opened';
     } else {
         health.innerHTML = 'Health: ' + enemy.health;
         armor.innerHTML = 'Armor: ' + enemy.armor;
@@ -86,22 +90,25 @@ function createEnemies() {
     createElementDiv('enemiesBoard', 'enemiesDIV', 'row row-cols-3 d-flex justify-content-center');
 
     for (let i = 0; i < combatArray.length; i++) {
-
         let enemy = combatArray[i];
         enemy.id = i;
         let name = enemy.name.replace(' ', '') + enemy.id;
 
-        if(enemy.health === 0) {
-
+        if (enemy.name === 'Chest') {
+            createElementDiv('enemiesDIV', 'col' + name, 'col d-flex justify-content-center');
+            createElementDiv('col' + name, 'enemy' + name, 'card m-2 text-dark', 'max-width: 18rem');
+            createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
+            createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
+            createElementButton('cardTitle' + name, name + 'open', 'Open', 'btn-primary');
+            document.getElementById(name + 'open').addEventListener('click', () => { openChest(enemy) });
+        } else if (enemy.health === 0) {
             createElementDiv('enemiesDIV', 'col' + name, 'col d-flex justify-content-center');
             createElementDiv('col' + name, 'enemy' + name, 'card m-2 text-dark', 'max-width: 18rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
             createElementDiv('cardTitle' + name, 'cardBody' + name, 'card-body');
             createElementDiv('cardBody' + name, 'enemies' + name, 'card-body');
             createElementText('enemies' + name, '', 'div', 'Dead', 'fs-4');
-
         } else {
-
             createElementDiv('enemiesDIV', 'col' + name, 'col d-flex justify-content-center');
             createElementDiv('col' + name, 'enemy' + name, 'card m-4 text-dark d-flex justify-content-center', 'width: 18rem');
             createElementText('enemy' + name, 'cardTitle' + name, 'h1', enemy.name, 'card-header');
@@ -111,10 +118,11 @@ function createEnemies() {
             createElementText('enemies' + name, name + 'Armor', 'div', 'Armor: ' + enemy.armor, 'fs-4');
             createElementButton('enemies' + name, name + 'Attack', 'Attack', 'btn-primary')
             document.getElementById(name + 'Attack').addEventListener('click', () => { attackEnemy(enemy.id) });
-
         }
     }
 }
+
+
 
 /* 
 loot(enemy) exists to add an item to the players inventory if it drops
