@@ -121,11 +121,16 @@ loot(enemy) exists to add an item to the players inventory if it drops
 
 function loot(enemy) {
     const result = roll(enemy.loot.lootChance); 
-    if (result) {
+    const existingItem = player.inventory.find((obj) => {
+        return obj.name == enemy.loot.name;
+    })
+    console.log(existingItem, 'exists')
+    if (result && existingItem) {
+        existingItem.quantity += 1
+        log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
+    } else if (result){
         player.inventory.push(structuredClone(enemy.loot))
         log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
     }
     updateInventory();
 }
-
-

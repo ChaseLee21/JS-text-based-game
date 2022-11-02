@@ -14,6 +14,7 @@ class Equipment {
         this.name = name;
         this.type = type;
         this.lootChance = lootChance;
+        this.quantity = 1;
         if (this.type === 'helm' || this.type === 'chest' || this.type === 'boots') {
             this.armor = value;
         } else if (this.type === 'weapon') {

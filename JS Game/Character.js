@@ -63,6 +63,7 @@ function updateInventory() {
     clearBoard(['inventory']);
     createElementDiv('inventoryDiv', 'inventory');
     for (let key of player.inventory) {
+        console.log(key)
         if (key.disabled === true) {
             createElementButton('inventory', key.name, key.name, 'btn-secondary');
             document.getElementById(key.name).setAttribute('disabled', '');
@@ -73,7 +74,7 @@ function updateInventory() {
                 equip(key);
             })
         } else if (key.type === 'potion') {
-            createElementButton('inventory', key.name, key.name, 'btn-secondary');
+            createElementButton('inventory', key.name, key.quantity + ' ' + key.name, 'btn-secondary');
             document.getElementById(key.name).addEventListener('click', () => {
                 usePotion(key);
             })
@@ -93,6 +94,8 @@ function removeItem(item) {
     const index = inventoryArray.findIndex(element => {
         return element.name === item.name
     })
-    inventoryArray.splice(index, 1);
+    if (item.quantity <= 1) {
+        inventoryArray.splice(index, 1);
+    } else item.quantity -= 1;
     updateInventory();
 }
