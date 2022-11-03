@@ -50,6 +50,9 @@ function enemyAttack(id) {
         log(enemy.name + ' hit ' + player.name + ' for ' + damage + ' health')
         player.health -= damage;
     }
+    if (player.health <= 0) {
+        end();
+    }
     updateStatus();
 }
 
@@ -133,6 +136,7 @@ function loot(enemy) {
     let result; 
     let existingItem;
     for (let loot of enemy.loot){
+        console.log(loot)
         result  = roll(loot.lootChance);
 
         existingItem = player.inventory.find((obj) => {

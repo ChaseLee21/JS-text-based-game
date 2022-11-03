@@ -34,10 +34,7 @@ let itemsArray = [
     new Equipment(`Mandrake's Roots`, 'potion', 10, 1), //12
     new Equipment(`Health Potion`, 'potion', 15, .5), //13
     new Equipment(`Prehistoric Claws`, 'weapon', 12, .5), //14
-    new Equipment(`Mage's Joke Book`, 'weapon', 24, .05), //15
-
-
-
+    new Equipment(`Mage's Joke Book`, 'weapon', 24, .05) //15
 ]; 
 
 
@@ -68,7 +65,9 @@ let enemiesArray = [
     new Chest([itemsArray[10], itemsArray[12], itemsArray[12], itemsArray[12], itemsArray[12]]), //6
     new Enemy('Mandrake', 56, 1, 10, [itemsArray[11]]), //7
     new Enemy('Skeleton', 24, 2, 10, [itemsArray[13]]), //8
-    new Enemy('Cave Troll', 50, 4, 16, [itemsArray[13], inventoryArray[14], itemsArray[15]]), //9
+    new Enemy('Cave Troll', 50, 4, 16, [itemsArray[13], itemsArray[14], itemsArray[15]]), //9
+    new Enemy('Necromancer', 100, 6, 20, []) //10
+
 
 
 ]; 
@@ -143,11 +142,28 @@ let roomArray = [
     new Room(`The RNG is in your favor`, 
     `I bet you will die before the end.`,
     [enemiesArray[5], enemiesArray[5], enemiesArray[5], enemiesArray[5], enemiesArray[5]],
-    []
+    [new Action('Okay now you will die', () => { updateGameBoard(roomArray[11]) })]
     ),
     new Room(`Maybe you're just good...`,
     `...or maybe I am just bad`,
-    [enemiesArray[9]])
+    [enemiesArray[9], enemiesArray[9]],
+    [new Action('Death', () => { updateGameBoard(roomArray[12]) })]
+    ), 
+    new Room(`Death is Here`,
+    `It Is Now`,
+    [enemiesArray[10]],
+    [new Action('Winner', () => { 
+        gameBoard.innerHTML = 'You have won the game';
+        document.getElementById('roomName').innerHTML = 'Wow you won';
+     })]
+    ),
+    new Room(`Death`,
+    `You have died. Lol.`,
+    [],
+    [new Action('Start Over', () => {
+        start()
+    })]
+    )
 ]; 
 
 
@@ -166,7 +182,8 @@ Global function declarations
 //start() initializes the game by updating the DOM with the starting elements
 function start() {
     player.name = document.getElementById('nameInput').value;
-    clearBoard(['startButton']);
+    const startButton = document.getElementById('startButton');
+    if (startButton) clearBoard(['startButton']);
     updateInventory();
     updateEquipment();
     updateGameBoard(roomArray[0]);
@@ -242,3 +259,15 @@ function roll(chance) {
     return (diceRoll < chance) ? true : false;
 }
 
+/* 
+exists to end the game when the player dies
+*/
+
+function end() {
+    updateGameBoard(roomArray[13]);
+    player.health = 100;
+    inventoryArray = [
+        itemsArray[3]
+    ]; 
+    player.inventory = inventoryArray;
+}

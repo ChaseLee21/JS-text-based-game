@@ -48,6 +48,8 @@ function updateStatus() {
         player.equipment.Chest.armor +
         player.equipment.Boots.armor
     );
+/*     if (player.health <= 0) {
+    } */
     document.getElementById('playerHealth').innerHTML = 'Health: ' + player.health;
     document.getElementById('playerArmor').innerHTML = 'Armor: ' + player.armor;
     document.getElementById('playerDamage').innerHTML = 'Damage: ' + player.equipment.Weapon.damage;
