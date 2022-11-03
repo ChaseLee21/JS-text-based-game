@@ -62,7 +62,6 @@ async function updateEnemies(id, enemy) {
     const health = document.getElementById(name + 'Health');
     const armor = document.getElementById(name + 'Armor');
     const attackBtn = document.getElementById(name + 'Attack');
-    console.log(health, armor, attackBtn, id, enemy);
     if(enemy.health <= 0) {
         health.innerHTML = 'Dead';
         armor.innerHTML = '';
@@ -131,7 +130,8 @@ determines if that item is already in the players inventory and if it is it adds
 */
 
 function loot(enemy) {
-    let result, existingItem;
+    let result; 
+    let existingItem;
     for (let loot of enemy.loot){
         result  = roll(loot.lootChance);
 
@@ -141,10 +141,10 @@ function loot(enemy) {
 
         if (result && existingItem) {
             existingItem.quantity += 1
-            log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
+            log(player.name + ' looted ' + loot.name + ' from ' + enemy.name);
         } else if (result) {
             player.inventory.push(structuredClone(loot))
-            log(player.name + ' looted ' + enemy.loot.name + ' from ' + enemy.name);
+            log(player.name + ' looted ' + loot.name + ' from ' + enemy.name);
         }
     }
     updateInventory();

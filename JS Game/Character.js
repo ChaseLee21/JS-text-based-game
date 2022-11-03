@@ -63,7 +63,6 @@ function updateInventory() {
     clearBoard(['inventory']);
     createElementDiv('inventoryDiv', 'inventory');
     for (let key of player.inventory) {
-        console.log(key)
         if (key.disabled === true) {
             createElementButton('inventory', key.name, key.name, 'btn-secondary');
             document.getElementById(key.name).setAttribute('disabled', '');

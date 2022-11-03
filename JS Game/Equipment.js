@@ -59,19 +59,18 @@ calls updateEquipment() and updateInventory() to update the DOM
 
 function equip(item) {
     let oldItem;
-    if(item.type === 'weapon') {
+    if (item.type === 'weapon') {
         oldItem = player.equipment.Weapon;
         player.equipment.Weapon = item;
-    }
-    if(item.type === 'helm') {
+    } else if (item.type === 'helm') {
         oldItem = player.equipment.Helm;
         player.equipment.Helm = item;
-    }
-    if(item.type === 'chest') {
+
+    } else if (item.type === 'chest') {
         oldItem = player.equipment.Chest;
         player.equipment.Chest = item;
-    }
-    if(item.type === 'boots') {
+
+    } else if (item.type === 'boots') {
         oldItem = player.equipment.Boots;
         player.equipment.Boots = item;
     } else {

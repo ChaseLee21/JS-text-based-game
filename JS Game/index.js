@@ -11,13 +11,12 @@ Any item, room, or enemy is created in these arrays
 
 /* 
 this array stores all items that can be placed in inventoryArray[] later in the game
-equipment = (name, type, armor, lootChance)
-item = (name, type, damage, lootChance)
-potion = (name, type, value, lootChance)
-weapon = 1
-helm = 2
-chest = 3
-boots = 4
+equipment = (name, type, value, lootChance)
+weapon
+helm 
+chest
+boots
+potion
 */
 let itemsArray = [
     new Equipment('nothing', 0), //0
@@ -30,14 +29,21 @@ let itemsArray = [
     new Equipment('Bat Blood', 'potion', 5, .5), //7
     new Equipment('Blood Boots', 'boots', 4, .6), //8
     new Equipment('Slime Chest', 'chest', 6, .2), //9
-    new Equipment('Plants Demise', 'weapon', 8, 1) //10
+    new Equipment('Plants Demise', 'weapon', 8, 1), //10
+    new Equipment(`Mandrake's Crown`, 'helm', 8, .3), //11
+    new Equipment(`Mandrake's Roots`, 'potion', 10, 1), //12
+    new Equipment(`Health Potion`, 'potion', 15, .5), //13
+    new Equipment(`Prehistoric Claws`, 'weapon', 12, .5), //14
+    new Equipment(`Mage's Joke Book`, 'weapon', 24, .05), //15
+
+
+
 ]; 
 
 
 //this array stores items in the players in current inventory
 let inventoryArray = [
-    itemsArray[3],
-    itemsArray[7]
+    itemsArray[3]
 ]; 
 
 
@@ -57,9 +63,13 @@ let enemiesArray = [
     new Enemy('Unknown Body', 0, 0, 0, [itemsArray[0]], false), //1
     new Enemy('Skeever', 8, 0, 6, [itemsArray[5]]), //2
     new Enemy('Skeleton', 16, 0, 10, [itemsArray[6]]), //3
-    new Enemy('Bat', 6, 0, 3, [itemsArray[7]]), //4
+    new Enemy('Bat', 6, 0, 6, [itemsArray[7]]), //4
     new Enemy('Blood Slime', 24, 0, 8, [itemsArray[8], itemsArray[9]]), //5
-    new Chest([itemsArray[10]]) //6
+    new Chest([itemsArray[10], itemsArray[12], itemsArray[12], itemsArray[12], itemsArray[12]]), //6
+    new Enemy('Mandrake', 56, 1, 10, [itemsArray[11]]), //7
+    new Enemy('Skeleton', 24, 2, 10, [itemsArray[13]]), //8
+    new Enemy('Cave Troll', 50, 4, 16, [itemsArray[13], inventoryArray[14], itemsArray[15]]), //9
+
 
 ]; 
 
@@ -111,14 +121,33 @@ let roomArray = [
     `The Blood Slime seeps into the rock covered floor. Two large rocks begin to shift shacking the cave and exposing a secret pathway.
     You follow this new path now lit up by the naturally glowing plants growing on the walls. You come closer to a dark presence. 
     Not far down the path you enter a room with a chest in the middle. The room is alive with unwordly like plants moving around you.`,
+    [],
+    [new Action('Open Chest', () => { updateGameBoard(roomArray[7]) })]
+    ),
+    new Room(`Mandrake's Lair`,
+    `You attempt to open the chest but the roots of the plant army begin to grow along the chest. It wont budge.
+    The plants seem to grow more and more angry. You have no choice except to fight for your survival.`,
+    [enemiesArray[7]],
+    [new Action('Reap Reward', () => { updateGameBoard(roomArray[8]) })]
+    ),
+    new Room(`Alter of Dead Plants`,
+    `The Mandrake ceases to exist. The only thing left behind is a broken chest and wilted roots.`,
     [enemiesArray[6]],
+    [new Action('Inevitable Death Ahead', () => { updateGameBoard(roomArray[9]) })]
+    ),
+    new Room(`The Begining to Your Demise`,
+    `You've made it far, lets see if you make it farther`,
+    [enemiesArray[8], enemiesArray[8], enemiesArray[8], enemiesArray[8]],
+    [new Action('damn boi', () => { updateGameBoard(roomArray[10]) })],
+    ),
+    new Room(`The RNG is in your favor`, 
+    `I bet you will die before the end.`,
+    [enemiesArray[5], enemiesArray[5], enemiesArray[5], enemiesArray[5], enemiesArray[5]],
     []
     ),
-    new Room(``,
-    ``,
-    [],
-    []
-    )
+    new Room(`Maybe you're just good...`,
+    `...or maybe I am just bad`,
+    [enemiesArray[9]])
 ]; 
 
 
